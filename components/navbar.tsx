@@ -54,10 +54,12 @@ export function Navbar() {
           </nav>
         </div>
         <div className="ml-auto flex items-center space-x-4">
-          <Link href="/login" className="text-sm font-medium transition-colors hover:text-primary">
-            Sign In
+          <Link href="/auth/login" className="text-sm font-medium transition-colors hover:text-primary">
+            Se connecter
           </Link>
-          <Button className="ml-4">Get Started</Button>
+          <Link href="/auth/register">
+            <Button className="ml-4">S'inscrire</Button>
+          </Link>
         </div>
       </div>
     </header>
