@@ -15,9 +15,50 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [accountType, setAccountType] = useState("farmer"); // "farmer" or "buyer"
+  const [accountType, setAccountType] = useState("farmer");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+
+    try {
+      // Validation de base
+      if (!name || !email || !password) {
+        throw new Error("Veuillez remplir tous les champs");
+      }
+
+      if (password.length < 8) {
+        throw new Error("Le mot de passe doit contenir au moins 8 caractères");
+      }
+
+      // TODO: Appeler votre API d'inscription ici
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          accountType,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || "Erreur lors de l'inscription");
+      }
+
+      // Rediriger vers la page de connexion après l'inscription réussie
+      router.push("/auth/login?registered=true");
+    } catch (err: any) {
+      setError(err.message || "Une erreur est survenue lors de l'inscription");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
@@ -67,7 +108,7 @@ export default function RegisterPage() {
               className={`flex-1 ${accountType === "farmer" ? "" : "bg-transparent hover:bg-gray-200"}`}
               onClick={() => setAccountType("farmer")}
             >
-              Farmer
+              Producteur
             </Button>
             <Button
               type="button"
@@ -75,7 +116,7 @@ export default function RegisterPage() {
               className={`flex-1 ${accountType === "buyer" ? "" : "bg-transparent hover:bg-gray-200"}`}
               onClick={() => setAccountType("buyer")}
             >
-              Buyer
+              Acheteur
             </Button>
           </div>
 
@@ -115,7 +156,7 @@ export default function RegisterPage() {
           </div>
 
           {/* Email Registration Form */}
-          <div className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name</Label>
               <Input
@@ -151,9 +192,9 @@ export default function RegisterPage() {
               />
             </div>
             <Button className="w-full" type="submit" disabled={isLoading}>
-              {isLoading ? "Creating account..." : "Create Account"}
+              {isLoading ? "Création du compte..." : "Créer un compte"}
             </Button>
-          </div>
+          </form>
         </CardContent>
         <CardFooter className="justify-center">
           <div className="text-sm text-gray-600">
