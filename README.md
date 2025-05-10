@@ -1,153 +1,153 @@
-# 🌱 Projet : **Kinasa** by SEDRA & TAFITA 👥
+# 🌱 Project: **Kinasa** by SEDRA & TAFITA 👥
 
 ---
 
-## ❓ Problématique principale
+## ❓ Main Issue
 
-> Il existe un écart entre les petits agriculteurs des pays en développement et les acheteurs internationaux, ce qui empêche souvent des échanges commerciaux équitables.
-
----
-
-## 🧩 Fonctionnalités de base proposées
-
-- 🧭 Mise en relation directe entre agriculteurs et acheteurs
-- 💰 Système de tarification équitable garantissant un prix juste
-- 🌍 Présentation des **histoires** des producteurs et leurs méthodes durables
+> There is a gap between small farmers in developing countries and international buyers, which often prevents fair trade exchanges.
 
 ---
 
-## 💻 Solution technique
+## 🧩 Proposed Core Features
 
-> Application web développée avec **React TypeScript** pour l’interface utilisateur.
-
----
-
-## 🔍 À définir pour concrétiser le projet
-
-- 🔄 **Processus de mise en relation**
-- 💸 **Mécanismes de fixation des prix équitables**
-- 🧑‍🌾 **Système de profils producteurs**
-- 🚚 **Fonctionnalités de paiement et logistique**
+- 🧭 Direct connection between farmers and buyers
+- 💰 Fair pricing system guaranteeing a just price
+- 🌍 Presentation of producers' **stories** and their sustainable methods
 
 ---
 
-# 1️⃣ Processus de mise en relation
+## 💻 Technical Solution
 
-- 🆔 **Inscription séparée** pour agriculteurs et acheteurs avec vérification
-- 🔎 **Recherche avancée** (produit, région, certification...)
-- 💬 **Messagerie intégrée** pour contact direct
-- 📄 **Demandes de devis standardisées** pour négociation simple
+> Web application developed with **React TypeScript** for the user interface.
 
 ---
 
-# 2️⃣ Mécanismes de tarification équitable
+## 🔍 To Be Defined to Implement the Project
 
-- 🧮 **Prix plancher** basé sur les coûts de production locaux
-- 🔍 **Transparence des marges** à chaque étape
-- 📈 **Indicateurs de marché** pour comparer avec les cours mondiaux
-- 🧾 **Certification équitable** (auto-déclarée à organisme tiers)
-
----
-
-# 3️⃣ Système de profils producteurs
-
-- 📋 **Fiches détaillées** sur les exploitations, pratiques et infrastructures
-- 🖼️ **Galerie photos/vidéos** des conditions de production
-- ⭐ **Système de notation** qualité + fiabilité
-- 📖 **Espace "Histoire"** pour valoriser l’aspect humain
+- 🔄 **Connection process**
+- 💸 **Fair pricing mechanisms**
+- 🧑‍🌾 **Producer profile system**
+- 🚚 **Payment and logistics features**
 
 ---
 
-# 4️⃣ Paiement et logistique
+# 1️⃣ Connection Process
 
-- 💳 **Paiement sécurisé**, avec acomptes possibles
-- 📦 **Suivi d’expédition** en temps réel
-- 📜 **Documentation automatisée** pour l’export/import
-- 🤝 **Partenariats logistiques** pour petits volumes
-
----
-
-# 📊 DÉTAILS TECHNIQUES
+- 🆔 **Separate registration** for farmers and buyers with verification
+- 🔎 **Advanced search** (product, region, certification...)
+- 💬 **Integrated messaging** for direct contact
+- 📄 **Standardized quote requests** for simple negotiation
 
 ---
 
-## 📉 1. Transparence des marges
+# 2️⃣ Fair Pricing Mechanisms
 
-🔎 Décomposition du prix final :
-
-- Prix producteur (incl. coût production)
-- Frais de certification/qualité
-- Logistique & transport
-- Frais plateforme
-- Marge acheteur (si divulguée)
-
-🎯 **Bénéfices :**
-
-- Renforce la confiance
-- Rend visible la valeur réelle
-- Réduit les intermédiaires abusifs
-- Éduque le consommateur final
-
-📈 Interface : graphique circulaire de répartition en %
+- 🧮 **Floor price** based on local production costs
+- 🔍 **Margin transparency** at each stage
+- 📈 **Market indicators** to compare with world prices
+- 🧾 **Fair trade certification** (self-declared to third-party organization)
 
 ---
 
-## ✅ 2. Certification équitable vérifiable
+# 3️⃣ Producer Profile System
 
-🔢 **Niveaux possibles :**
-
-- 📝 Auto-déclaration
-- 👥 Vérification communautaire
-- 🏢 Organisme tiers (Fair Trade, Rainforest Alliance…)
-- 📹 Visite virtuelle participative
-
-🔍 **Méthodes de vérification :**
-
-- Preuves visuelles (photos, registres)
-- Audits (programmés ou surprises)
-- Témoignages employés
-- Rapports de conformité
-
-📌 Avantage : flexibilité selon moyens & besoin d’assurance
+- 📋 **Detailed records** on farms, practices, and infrastructure
+- 🖼️ **Photo/video gallery** of production conditions
+- ⭐ **Rating system** for quality + reliability
+- 📖 **"Story" space** to highlight the human aspect
 
 ---
 
-## 🧾 3. Fiches d’exploitation
+# 4️⃣ Payment and Logistics
 
-🧱 **Structure d’informations :**
-
-- Localisation, taille
-- Cultures, variétés
-- Méthodes agricoles : bio, agroforesterie…
-- Saisonnalité, volumes
-- Infrastructures (stockage, transformation)
-
-🔧 **Aspects techniques :**
-
-- Irrigation, intrants utilisés
-- Post-récolte, conservation
-- Biodiversité et durabilité
-
-👁️ Objectif : permettre une évaluation fine par les acheteurs
+- 💳 **Secure payment**, with possible deposits
+- 📦 **Real-time shipment tracking**
+- 📜 **Automated documentation** for export/import
+- 🤝 **Logistics partnerships** for small volumes
 
 ---
 
-## ⭐ 4. Système de notation
+# 📊 TECHNICAL DETAILS
 
-🧮 **Critères :**
+---
 
-- Conformité qualité
-- Respect délais
+## 📉 1. Margin Transparency
+
+🔎 Breakdown of the final price:
+
+- Producer price (incl. production cost)
+- Certification/quality fees
+- Logistics & transportation
+- Platform fees
+- Buyer margin (if disclosed)
+
+🎯 **Benefits:**
+
+- Builds trust
+- Makes real value visible
+- Reduces abusive intermediaries
+- Educates the end consumer
+
+📈 Interface: pie chart showing distribution in %
+
+---
+
+## ✅ 2. Verifiable Fair Trade Certification
+
+🔢 **Possible levels:**
+
+- 📝 Self-declaration
+- 👥 Community verification
+- 🏢 Third-party organization (Fair Trade, Rainforest Alliance...)
+- 📹 Participatory virtual visit
+
+🔍 **Verification methods:**
+
+- Visual evidence (photos, records)
+- Audits (scheduled or surprise)
+- Employee testimonials
+- Compliance reports
+
+📌 Advantage: flexibility based on means & assurance needs
+
+---
+
+## 🧾 3. Farm Profiles
+
+🧱 **Information structure:**
+
+- Location, size
+- Crops, varieties
+- Agricultural methods: organic, agroforestry...
+- Seasonality, volumes
+- Infrastructure (storage, processing)
+
+🔧 **Technical aspects:**
+
+- Irrigation, inputs used
+- Post-harvest, preservation
+- Biodiversity and sustainability
+
+👁️ Objective: to enable detailed evaluation by buyers
+
+---
+
+## ⭐ 4. Rating System
+
+🧮 **Criteria:**
+
+- Quality compliance
+- Meeting deadlines
 - Communication
-- Cohérence entre déclaration et réalité
-- Stabilité des produits
+- Consistency between declaration and reality
+- Product stability
 
-🔁 **Fonctionnement :**
+🔁 **Operation:**
 
-- Évaluation post-transaction
-- Avis + photos
-- Notation réciproque (producteur <-> acheteur)
-- Litiges gérés via plateforme
-- Historique public et traçable
+- Post-transaction evaluation
+- Reviews + photos
+- Reciprocal rating (producer <-> buyer)
+- Disputes managed via platform
+- Public and traceable history
 
 ---
