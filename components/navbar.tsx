@@ -8,7 +8,7 @@ export function Navbar() {
       <div className="container flex h-16 max-w-screen-xl items-center">
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Image src={"/logo.jpg"} width={50} height={50} alt="logo" />
+            <Image src={"/logo.svg"} width={50} height={50} alt="logo" />
             <span className="font-bold">Kinasa</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
@@ -49,7 +49,7 @@ export function Navbar() {
             Se connecter
           </Link>
           <Link href="/auth/register">
-            <Button className="ml-4">S'inscrire</Button>
+            <Button className="ml-4 rounded-full">S'inscrire</Button>
           </Link>
         </div>
       </div>

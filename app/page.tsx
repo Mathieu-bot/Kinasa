@@ -9,17 +9,22 @@ import { FaqSection } from "@/components/faq-section";
 import { CtaSection } from "@/components/cta-section";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 import { Navbar } from "@/components/navbar";
 
 export default function HomePage() {
   return (
     <>
-      <BackgroundGradientAnimation>
+      <header className="fixed top-0 z-50 w-full mt-4 ">
         <Navbar />
-        <HeroSection />
-      </BackgroundGradientAnimation>
+      </header>
+      <HeroSection />
+      <FeaturesSection />
+      <HowItWorksSection />
+      <ImpactSection />
+      <StatsSection />
+      <TestimonialsSection />
+      <CtaSection />
+      <FaqSection />
     </>
   );
   {
