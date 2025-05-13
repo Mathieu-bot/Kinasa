@@ -54,12 +54,8 @@ export const authOptions: AuthOptions = {
           throw new Error("Email does not exist");
         }
 
-        // Note: Dans un système de production, le mot de passe serait haché
-        // mais pour simplifier, nous comparons directement les mots de passe
-        const isCorrectPassword = credentials.password === user.password;
-        
-        // Si vous voulez utiliser bcrypt pour la comparaison, utilisez ceci :
-        // const isCorrectPassword = await compare(credentials.password, user.password);
+        // Use bcrypt to securely compare passwords
+        const isCorrectPassword = await compare(credentials.password, user.password);
 
         if (!isCorrectPassword) {
           throw new Error("Incorrect password");
