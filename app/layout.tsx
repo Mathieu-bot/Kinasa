@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/layout/theme-provider";
 import "./globals.css";
 import type { Metadata } from "next";
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
+import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,19 +29,21 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="w-full relative z-0 overflow-x-hidden">
-            <div className="z-2 pt-14 bg-gradient-to-tr to-white from-emerald-300 dark:from-emerald-950 ">
-              {children}
+        <Providers>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="w-full relative z-0 overflow-x-hidden">
+              <div className="z-2 pt-14 bg-gradient-to-tr to-white from-emerald-300 dark:from-emerald-950 ">
+                {children}
+              </div>
+              {/* <AnimatedGridPattern className="w-full bg-slate-300 blur-sm h-full z-1"></AnimatedGridPattern> */}
             </div>
-            {/* <AnimatedGridPattern className="w-full bg-slate-300 blur-sm h-full z-1"></AnimatedGridPattern> */}
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

@@ -31,12 +31,6 @@ export function Navbar() {
             >
               Success Stories
             </Link>
-            <Link
-              href="#pricing"
-              className="transition-colors hover:text-primary"
-            >
-              Pricing
-            </Link>
             <Link href="#faq" className="transition-colors hover:text-primary">
               FAQ
             </Link>
