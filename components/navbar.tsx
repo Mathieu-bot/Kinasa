@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { Logo } from "./ui/Logo";
 
 export function Navbar() {
   return (
@@ -8,7 +9,7 @@ export function Navbar() {
       <div className="container flex h-16 max-w-screen-xl items-center">
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Image src={"/logo.svg"} width={50} height={50} alt="logo" />
+            <Logo />
             <span className="font-bold">Kinasa</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
@@ -29,12 +30,6 @@ export function Navbar() {
               className="transition-colors hover:text-primary"
             >
               Success Stories
-            </Link>
-            <Link
-              href="#pricing"
-              className="transition-colors hover:text-primary"
-            >
-              Pricing
             </Link>
             <Link href="#faq" className="transition-colors hover:text-primary">
               FAQ

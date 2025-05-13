@@ -28,23 +28,23 @@ const chartData = [
 
 const chartConfig = {
   valeur: {
-    label: "Valeur",
+    label: "Value",
   },
   farmer_income: {
-    label: "Revenus (+40%)",
+    label: "Income (+40%)",
     color: "hsl(142.1, 76.2%, 36.3%)",
     icon: TrendingUp,
   },
   farmers_connected: {
-    label: "Milliers d'agriculteurs",
+    label: "Thousands of farmers",
     color: "hsl(120, 100%, 25%)",
   },
   satisfied_buyers: {
-    label: "Acheteurs satisfaits",
+    label: "Satisfied buyers",
     color: "hsl(204, 70%, 40%)",
   },
   countries: {
-    label: "Pays représentés",
+    label: "Countries represented",
     color: "hsl(39, 100%, 50%)",
   },
 } satisfies ChartConfig;
@@ -52,14 +52,14 @@ const chartConfig = {
 export function StatsSection() {
   return (
     <section className="container max-w-screen-xl py-16 bg-primary/5">
-      <h2 className="text-3xl font-bold text-center mb-8">Notre impact</h2>
+      <h2 className="text-3xl font-bold text-center mb-8">Our Impact</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
         <ChartStats />
 
         <Card>
           <CardHeader>
-            <CardTitle>Impact de Kinasa</CardTitle>
-            <CardDescription>Statistiques 2024</CardDescription>
+            <CardTitle>Kinasa Impact</CardTitle>
+            <CardDescription>2024 Statistics</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig}>
@@ -101,10 +101,10 @@ export function StatsSection() {
           </CardContent>
           <CardFooter className="flex-col items-start gap-2 text-sm">
             <div className="flex gap-2 font-medium leading-none">
-              En progression constante <TrendingUp className="h-4 w-4" />
+              Constantly growing <TrendingUp className="h-4 w-4" />
             </div>
             <div className="leading-none text-muted-foreground">
-              Données basées sur l'année 2024
+              Data based on the year 2024
             </div>
           </CardFooter>
         </Card>
@@ -114,16 +114,16 @@ export function StatsSection() {
 }
 
 const chartData2 = [
-  { name: "producteurs", agriculteurs: 1260, cooperatives: 570 },
+  { name: "producers", agriculteurs: 1260, cooperatives: 570 },
 ];
 
 const chartConfig2 = {
   agriculteurs: {
-    label: "Agriculteurs",
+    label: "Farmers",
     color: "hsl(142.1, 76.2%, 36.3%)",
   },
   cooperatives: {
-    label: "Coopératives",
+    label: "Cooperatives",
     color: "hsl(41, 70%, 40%)",
   },
 } satisfies ChartConfig;
@@ -134,8 +134,8 @@ export function ChartStats() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Profils Producteurs</CardTitle>
-        <CardDescription>Janvier - Juin 2024</CardDescription>
+        <CardTitle>Producer Profiles</CardTitle>
+        <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-1 items-center pb-0">
         <ChartContainer
@@ -171,7 +171,7 @@ export function ChartStats() {
                           y={(viewBox.cy || 0) + 4}
                           className="fill-muted-foreground"
                         >
-                          Producteurs
+                          Producers
                         </tspan>
                       </text>
                     );
@@ -198,10 +198,10 @@ export function ChartStats() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Croissance de 5.2% ce mois-ci <TrendingUp className="h-4 w-4" />
+          5.2% growth this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Profils détaillés avec photos, vidéos et histoires des producteurs
+          Detailed profiles with photos, videos and producer stories
         </div>
       </CardFooter>
     </Card>
