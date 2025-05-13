@@ -1,6 +1,6 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export function ImpactSection() {
   return (
@@ -13,19 +13,22 @@ export function ImpactSection() {
             impact globally
           </h2>
           <p className="text-gray-600 mb-8">
-            Kinasa empowers farming communities around the world by connecting them directly with fair trade
-            opportunities, eliminating exploitative middlemen, and ensuring they receive proper compensation for their
-            quality products.
+            Kinasa empowers farming communities around the world by connecting
+            them directly with fair trade opportunities, eliminating
+            exploitative middlemen, and ensuring they receive proper
+            compensation for their quality products.
           </p>
 
           <Card className="bg-primary/5 border-primary/20 mb-6">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Community Impact</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                Community Impact
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-xs text-gray-600">
-                For every transaction, 1% goes toward local community development projects chosen by the producer
-                communities.
+                For every transaction, 1% goes toward local community
+                development projects chosen by the producer communities.
               </p>
             </CardContent>
           </Card>
@@ -33,35 +36,83 @@ export function ImpactSection() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex items-center gap-2">
               <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <svg
+                  className="h-3 w-3 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </div>
-              <span className="text-sm text-gray-600">Economic empowerment</span>
+              <span className="text-sm text-gray-600">
+                Economic empowerment
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <svg
+                  className="h-3 w-3 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </div>
-              <span className="text-sm text-gray-600">Sustainable agriculture</span>
+              <span className="text-sm text-gray-600">
+                Sustainable agriculture
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <svg
+                  className="h-3 w-3 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </div>
-              <span className="text-sm text-gray-600">Women-led cooperatives</span>
+              <span className="text-sm text-gray-600">
+                Women-led cooperatives
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <svg
+                  className="h-3 w-3 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </div>
-              <span className="text-sm text-gray-600">Environmental conservation</span>
+              <span className="text-sm text-gray-600">
+                Environmental conservation
+              </span>
             </div>
           </div>
         </div>
@@ -70,7 +121,7 @@ export function ImpactSection() {
           <div className="space-y-4">
             <div className="bg-gray-100 h-64 rounded-lg overflow-hidden relative">
               <Image
-                src="/placeholder.svg?height=256&width=200"
+                src="/coffee.jpg"
                 alt="Farmer harvesting coffee"
                 width={200}
                 height={256}
@@ -79,7 +130,7 @@ export function ImpactSection() {
             </div>
             <div className="bg-gray-100 h-32 rounded-lg overflow-hidden relative">
               <Image
-                src="/placeholder.svg?height=128&width=200"
+                src="/Choco.jpg"
                 alt="Coffee processing"
                 width={200}
                 height={128}
@@ -126,7 +177,8 @@ export function ImpactSection() {
               </div>
               <h4 className="font-semibold mb-2">Ethiopian Coffee Revival</h4>
               <p className="text-sm text-gray-600 mb-4">
-                How a coffee cooperative in Ethiopia increased their income by 35% and invested in local education.
+                How a coffee cooperative in Ethiopia increased their income by
+                35% and invested in local education.
               </p>
               <Button variant="outline" size="sm" className="w-full">
                 Read Story
@@ -147,7 +199,8 @@ export function ImpactSection() {
               </div>
               <h4 className="font-semibold mb-2">From Bean to Chocolate</h4>
               <p className="text-sm text-gray-600 mb-4">
-                Peruvian cocoa farmers who transformed their community by connecting with specialty chocolate makers.
+                Peruvian cocoa farmers who transformed their community by
+                connecting with specialty chocolate makers.
               </p>
               <Button variant="outline" size="sm" className="w-full">
                 Read Story
@@ -168,7 +221,8 @@ export function ImpactSection() {
               </div>
               <h4 className="font-semibold mb-2">Women-Led Spice Revolution</h4>
               <p className="text-sm text-gray-600 mb-4">
-                How a women's collective in Kerala transformed the local economy through direct spice exports.
+                How a women's collective in Kerala transformed the local economy
+                through direct spice exports.
               </p>
               <Button variant="outline" size="sm" className="w-full">
                 Read Story
@@ -178,5 +232,5 @@ export function ImpactSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
