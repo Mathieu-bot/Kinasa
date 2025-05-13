@@ -21,7 +21,8 @@ import { ChromeIcon, Facebook, LucideFacebook } from "lucide-react";
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  // Définir le tableau de bord comme destination par défaut après connexion
+  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -131,7 +132,37 @@ export default function LoginPage() {
                 disabled={isLoading}
               />
             </div>
-            <Button className="w-full" type="submit" disabled={isLoading}>
+            <Button 
+              className="w-full" 
+              onClick={async () => {
+                if (!email || !password) {
+                  setError("Email and password are required");
+                  return;
+                }
+                setIsLoading(true);
+                try {
+                  const result = await signIn("credentials", {
+                    redirect: false,
+                    email,
+                    password,
+                  });
+                  
+                  if (result?.error) {
+                    setError(result.error);
+                  } else {
+                    // Redirection réussie vers le tableau de bord
+                    router.push(callbackUrl);
+                  }
+                } catch (error) {
+                  console.error("Login error:", error);
+                  setError("An error occurred during login");
+                } finally {
+                  setIsLoading(false);
+                }
+              }}
+              type="button" 
+              disabled={isLoading}
+            >
               {isLoading ? "Loading..." : "Sign In"}
             </Button>
           </div>
