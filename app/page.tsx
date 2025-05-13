@@ -10,6 +10,7 @@ import { CtaSection } from "@/components/cta-section";
 import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/navbar";
+import Footer from "@/components/ui/Footer";
 
 export default function HomePage() {
   return (
@@ -25,6 +26,7 @@ export default function HomePage() {
       <TestimonialsSection />
       <CtaSection />
       <FaqSection />
+      <Footer />
     </>
   );
   {
