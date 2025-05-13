@@ -27,23 +27,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <Providers>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <div className="w-full relative z-0 overflow-x-hidden">
-              <div className="z-2 pt-14 bg-gradient-to-tr to-white from-emerald-300 dark:from-emerald-950 ">
-                {children}
-              </div>
-              {/* <AnimatedGridPattern className="w-full bg-slate-300 blur-sm h-full z-1"></AnimatedGridPattern> */}
-            </div>
-          </ThemeProvider>
-        </Providers>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="w-full relative z-0 overflow-x-hidden">
+            <div className="z-2 pt-14">{children}</div>
+            <AnimatedGridPattern className="w-full blur-sm h-full -z-10"></AnimatedGridPattern>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
