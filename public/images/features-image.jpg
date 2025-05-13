@@ -1,0 +1,12 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#0074D9" />
+  <rect x="50" y="100" width="200" height="150" rx="10" fill="#7FDBFF" />
+  <rect x="300" y="100" width="200" height="150" rx="10" fill="#7FDBFF" />
+  <rect x="550" y="100" width="200" height="150" rx="10" fill="#7FDBFF" />
+  <rect x="50" y="300" width="200" height="150" rx="10" fill="#7FDBFF" />
+  <rect x="300" y="300" width="200" height="150" rx="10" fill="#7FDBFF" />
+  <rect x="550" y="300" width="200" height="150" rx="10" fill="#7FDBFF" />
+  <text x="50%" y="50%" font-family="Arial" font-size="36" text-anchor="middle" dominant-baseline="middle" fill="#FFF">
+    Caractéristiques de la plateforme
+  </text>
+</svg> 
