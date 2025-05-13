@@ -74,10 +74,10 @@ export function FeaturesSection() {
         id="features"
       >
         <div className="flex flex-col gap-5 ">
-          <h2 className="text-7xl font-bold text-green-200 mb-4">
+          <h2 className="text-7xl font-bold text-grey-600 dark:text-white mb-4">
             How Kinasa Works
           </h2>
-          <p className="text-grey-600 text-2xl max-w-2xl mx-auto mb-12">
+          <p className="text-grey-600 dark:text-white  text-2xl max-w-2xl mx-auto mb-12">
             Our platform bridges the gap between small farmers and international
             buyers, creating a more sustainable and equitable global trade
             ecosystem.

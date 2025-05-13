@@ -12,12 +12,12 @@ export function CtaSection() {
           Join thousands of farmers and ethical buyers already creating
           sustainable supply chains on Kinasa.
         </p>
-        <div className="flex flex-wrap gap-4 w-full">
+        <div className="flex flex-wrap gap-4 w-full justify-center">
           <InteractiveHoverButton
             text="Join as Farmer"
-            className="bg-green-600 w-1/5 py-4"
+            className="bg-green-600 w-1/3 py-4"
           />
-          <InteractiveHoverButton text="Join as Buyer" className="w-1/5 py-4" />
+          <InteractiveHoverButton text="Join as Buyer" className="w-1/3 py-4" />
         </div>
         <p className="text-sm text-gray-500 mt-6">
           Register today and get a 3-month free trial with full platform access.
