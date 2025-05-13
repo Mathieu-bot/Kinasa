@@ -103,8 +103,8 @@ export function AnimatedGridPattern({
       className={cn(
         "pointer-events-none absolute inset-0 h-full w-full",
         theme === "dark"
-          ? "fill-emerald-600/20 stroke-emerald-50/5"
-          : "fill-emerald-200/10 stroke-emerald-50/50",
+          ? "fill-emerald-700/10 stroke-amber-100/10"
+          : "fill-emerald-100/20 stroke-amber-50/30",
         className
       )}
       {...props}
@@ -131,8 +131,9 @@ export function AnimatedGridPattern({
           <motion.rect
             initial={{ opacity: 0 }}
             animate={{
-              opacity: 0.5,
+              opacity: theme === "dark" ? 0.2 : 0.4,
             }}
+            className={theme === "dark" ? "text-amber-100/30" : "text-emerald-400/80"}
             transition={{
               duration,
               repeat: 1,

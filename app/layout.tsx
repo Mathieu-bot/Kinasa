@@ -36,7 +36,7 @@ export default function RootLayout({
         >
           <div className="w-full relative z-0 overflow-x-hidden">
             <div className="z-2 pt-14">{children}</div>
-            <AnimatedGridPattern className="w-full bg-slate-300 blur-sm h-full z-1"></AnimatedGridPattern>
+            <AnimatedGridPattern className="w-full blur-sm h-full -z-10"></AnimatedGridPattern>
           </div>
         </ThemeProvider>
       </body>
