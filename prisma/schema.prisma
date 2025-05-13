@@ -16,6 +16,10 @@ model User {
   email     String   @unique
   password  String
   role      Role     @default(BUYER)
+  
+  cooperative Cooperative? @relation(fields: [cooperativeId], references: [id])
+  cooperativeId String?
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -23,4 +27,121 @@ model User {
 enum Role {
   FARMER
   BUYER
+  ADMIN
+}
+
+model Cooperative {
+  id                 String               @id @default(uuid())
+  nom                String
+  description        String
+  region             String
+  pays               String
+  annee_fondation    Int
+  nombre_familles    Int
+  note_moyenne       Float                @default(0)
+  photo_profil       String?
+  
+  membres            User[]
+  certifications     Certification[]
+  produits           Produit[]
+  methodes_production MethodeProduction[]
+  capacites_production CapaciteProduction[]
+  avis               Avis[]
+  
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+}
+
+model Certification {
+  id                    String      @id @default(uuid())
+  nom_certification     String
+  organisme_verification String
+  date_validite         DateTime
+  description           String?
+  
+  cooperative           Cooperative @relation(fields: [cooperativeId], references: [id], onDelete: Cascade)
+  cooperativeId         String
+  
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
+}
+
+model Produit {
+  id                  String          @id @default(uuid())
+  nom                 String
+  variete             String
+  description         String
+  prix_plancher       Float
+  altitude_culture    Int?
+  periode_disponibilite String
+  commande_minimum    Int
+  photo_produit       String?
+  
+  cooperative         Cooperative     @relation(fields: [cooperativeId], references: [id], onDelete: Cascade)
+  cooperativeId       String
+  
+  structure_prix      StructurePrix?
+  
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+}
+
+model MethodeProduction {
+  id                  String      @id @default(uuid())
+  type                String
+  description         String
+  icone               String
+  
+  cooperative         Cooperative @relation(fields: [cooperativeId], references: [id], onDelete: Cascade)
+  cooperativeId       String
+  
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+}
+
+model CapaciteProduction {
+  id                  String      @id @default(uuid())
+  type                String
+  description         String
+  valeur              String
+  
+  cooperative         Cooperative @relation(fields: [cooperativeId], references: [id], onDelete: Cascade)
+  cooperativeId       String
+  
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+}
+
+model StructurePrix {
+  id                  String    @id @default(uuid())
+  produitId           String    @unique
+  produit             Produit   @relation(fields: [produitId], references: [id], onDelete: Cascade)
+  
+  prix_producteur     Float
+  couts_certification Float
+  frais_logistique    Float
+  frais_plateforme    Float
+  details_producteur  String?   // Ex: "coûts de production: 2.80€, prime qualité: 0.70€, marge: 1.00€"
+  details_certification String?
+  details_logistique  String?
+  details_plateforme  String?
+  
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+}
+
+model Avis {
+  id                  String      @id @default(uuid())
+  nom_acheteur        String
+  pays_acheteur       String
+  note                Int         // 1-5
+  commentaire         String
+  photo_profil        String?
+  date_avis           DateTime    @default(now())
+  
+  cooperative         Cooperative @relation(fields: [cooperativeId], references: [id], onDelete: Cascade)
+  cooperativeId       String
+  
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
 }
