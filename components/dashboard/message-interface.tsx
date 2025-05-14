@@ -230,7 +230,7 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
                 </div>
                 <div className="flex-1 overflow-hidden">
                   <div className="flex items-center justify-between">
-                    <h3 className={`font-medium truncate ${contact.unreadCount ? 'text-emerald-800 font-semibold' : ''}`}>{contact.name}</h3>
+                    <h3 className={`font-medium truncate ${contact.unreadCount ? 'font-semibold' : ''}`}>{contact.name}</h3>
                     <span className="text-xs text-muted-foreground">{contact.lastSeen}</span>
                   </div>
                   {contact.lastMessage && (
