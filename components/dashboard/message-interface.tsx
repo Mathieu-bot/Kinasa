@@ -233,14 +233,14 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
                     <span className="text-xs text-muted-foreground">{contact.lastSeen}</span>
                   </div>
                   {contact.lastMessage && (
-                    <p className={`text-sm truncate ${contact.unreadCount ? 'text-emerald-700 font-medium' : 'text-muted-foreground'}`}>{contact.lastMessage}</p>
+                    <p className={`text-sm truncate ${contact.unreadCount ? 'ont-semibold' : 'text-muted-foreground'}`}>{contact.lastMessage}</p>
                   )}
                   {contact.company && (
                     <p className="text-xs text-emerald-600 truncate">{contact.company}</p>
                   )}
                 </div>
                 {(contact.unreadCount && contact.unreadCount > 0) ? (
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-[10px] font-medium text-white  .animate-pulse-subtle">
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-[10px] font-medium text-white animate-pulse-subtle">
                     {contact.unreadCount}
                   </div>
                 ) : null}
