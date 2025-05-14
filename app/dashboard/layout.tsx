@@ -22,7 +22,7 @@ export default function DashboardLayout({ children, params }: DashboardLayoutPro
   
   return (
     <div className="min-h-screen w-full">
-      {/* Sidebar - on passe les props pour la version mobile */}
+      {/* Sidebar with mobile props */}
       <DashboardSidebar 
         type={userType} 
         isMobileOpen={sidebarOpen} 
@@ -37,7 +37,7 @@ export default function DashboardLayout({ children, params }: DashboardLayoutPro
           userName={userName} 
           onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
         />
-        <main className="flex-1 overflow-auto p-4 md:p-6 mt-14 bg-gradient-to-br from-amber-50/50 to-emerald-50/50">
+        <main className="flex-1 overflow-auto p-4 md:p-6 bg-gradient-to-br from-amber-50/50 to-emerald-50/50">
           {children}
         </main>
       </div>
