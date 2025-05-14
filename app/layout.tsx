@@ -3,7 +3,10 @@ import { ThemeProvider } from "@/components/layout/theme-provider";
 import "./globals.css";
 import type { Metadata } from "next";
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
+<<<<<<< HEAD
 import AuthProvider from "@/components/auth-provider";
+=======
+>>>>>>> hotfix/filter
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+<<<<<<< HEAD
         <AuthProvider>
           <ThemeProvider
             attribute="class"
@@ -42,6 +46,19 @@ export default function RootLayout({
             </div>
           </ThemeProvider>
         </AuthProvider>
+=======
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="w-full relative z-0 overflow-x-hidden">
+            <div className="z-2 pt-14">{children}</div>
+            <AnimatedGridPattern className="w-full blur-sm h-full -z-10"></AnimatedGridPattern>
+          </div>
+        </ThemeProvider>
+>>>>>>> hotfix/filter
       </body>
     </html>
   );
