@@ -1,9 +1,8 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Send, Search, Phone, Video, MoreVertical, FileText, Image as ImageIcon, AtSign, PaperclipIcon, Smile } from "lucide-react"
+import { Send, Search, Phone, Video, MoreVertical, FileText, Image as ImageIcon, AtSign, PaperclipIcon, Smile, ChevronLeft, Menu } from "lucide-react"
 import { InputWithIcon } from "@/components/ui/input-with-icon"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -14,7 +13,7 @@ export interface Message {
   content: string
   timestamp: string
   read: boolean
-  isNew?: boolean  // To mark new messages that haven't been seen yet
+  isNew?: boolean 
 }
 
 export interface Contact {
@@ -40,20 +39,17 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
   const [messages, setMessages] = useState<Message[]>([])
   const [messageInput, setMessageInput] = useState("")
   const [searchTerm, setSearchTerm] = useState("")
+  const [isMobileViewingChat, setIsMobileViewingChat] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Sort contacts with unread messages first, then filter by search
   const filteredContacts = contacts
     .sort((a, b) => {
-      // Sort by unread count (descending)
       const aUnread = a.unreadCount || 0
       const bUnread = b.unreadCount || 0
       if (aUnread !== bUnread) return bUnread - aUnread
       
-      // If unread counts are the same, sort by online status
       if (a.online !== b.online) return a.online ? -1 : 1
-      
-      // If online status is the same, sort alphabetically
       return a.name.localeCompare(b.name)
     })
     .filter(contact => 
@@ -61,23 +57,18 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
       (contact.company && contact.company.toLowerCase().includes(searchTerm.toLowerCase()))
     )
 
-  // Set the first contact as active by default
   useEffect(() => {
     if (contacts.length > 0 && !activeContact) {
       setActiveContact(contacts[0])
-      // Load messages for first contact
       loadMessages(contacts[0].id)
     }
   }, [contacts])
 
-  // Auto scroll to bottom of messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
 
-  // Simulate loading messages for a contact
   const loadMessages = (contactId: string) => {
-    // In a real app, this would fetch from an API
     const simulatedMessages: Message[] = [
       {
         id: '1',
@@ -130,7 +121,6 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
       }
     ]
     
-    // Add some unread messages for certain contacts
     if (contactId === 'farmer1' || contactId === 'buyer1') {
       simulatedMessages.push(
         {
@@ -155,7 +145,6 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
     setMessages(simulatedMessages)
   }
 
-  // Handle sending a new message
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault()
     
@@ -172,7 +161,6 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
     setMessages([...messages, newMessage])
     setMessageInput("")
     
-    // Simulate an automatic reply after 2 seconds
     setTimeout(() => {
       const autoReply: Message = {
         id: `msg-auto-${Date.now()}`,
@@ -187,16 +175,20 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
     }, 2000)
   }
 
-  // Handle changing the active contact
   const handleContactSelect = (contact: Contact) => {
     setActiveContact(contact)
     loadMessages(contact.id)
+    setIsMobileViewingChat(true)
+  }
+  
+  const handleBackToContacts = () => {
+    setIsMobileViewingChat(false)
   }
 
   return (
     <div className="flex h-[calc(100vh-100px)] overflow-hidden rounded-lg bg-white shadow-md">
-      {/* Contacts list */}
-      <div className="w-1/4 border-r bg-gradient-to-b from-emerald-50 to-amber-50/30">
+      {/* Contacts list - hidden on mobile when viewing chat */}
+      <div className={`${isMobileViewingChat ? 'hidden md:block' : 'w-full'} md:w-1/3 lg:w-1/4 border-r bg-gradient-to-b from-emerald-50 to-amber-50/30`}>
         <div className="p-4 border-b">
           <InputWithIcon 
             placeholder="Search contacts..." 
@@ -251,13 +243,20 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
         </ScrollArea>
       </div>
       
-      {/* Message area */}
-      <div className="flex flex-1 flex-col">
+      {/* Message area - fullscreen on mobile when viewing chat */}
+      <div className={`${isMobileViewingChat ? 'w-full' : 'hidden md:flex'} flex-1 flex-col`}>
         {activeContact ? (
           <>
-            {/* Active contact header */}
             <div className="flex items-center justify-between border-b p-4 bg-gradient-to-r from-emerald-50 to-amber-50/50">
               <div className="flex items-center gap-3">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="md:hidden text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 mr-1"
+                  onClick={handleBackToContacts}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
                 <Avatar>
                   <AvatarImage src={activeContact.avatar} alt={activeContact.name} />
                   <AvatarFallback className={activeContact.role === 'buyer' ? "bg-amber-100 text-amber-800" : "bg-emerald-100 text-emerald-800"}>
@@ -280,10 +279,10 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
                 </div>
               </div>
               <div className="flex items-center gap-1">
-                <Button variant="ghost" size="icon" className="rounded-full text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700">
+                <Button variant="ghost" size="icon" className="rounded-full text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 hidden sm:flex">
                   <Phone className="h-5 w-5" />
                 </Button>
-                <Button variant="ghost" size="icon" className="rounded-full text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700">
+                <Button variant="ghost" size="icon" className="rounded-full text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 hidden sm:flex">
                   <Video className="h-5 w-5" />
                 </Button>
                 <Button variant="ghost" size="icon" className="rounded-full text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700">
@@ -293,7 +292,7 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
             </div>
             
             {/* Messages */}
-            <ScrollArea className="flex-1 p-4 bg-gradient-to-br from-amber-50/20 to-emerald-50/30">
+            <ScrollArea className="flex-1 p-3 sm:p-4 bg-gradient-to-br from-amber-50/20 to-emerald-50/30">
               <div className="space-y-4">
                 {messages.map((message) => (
                   <div
@@ -301,7 +300,7 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
                     className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`relative max-w-[75%] rounded-lg p-3 ${message.isNew ? 'animate-pulse' : ''} ${
+                      className={`relative max-w-[85%] sm:max-w-[75%] rounded-lg p-2 sm:p-3 ${message.isNew ? 'animate-pulse' : ''} ${
                         message.sender === 'user' 
                           ? 'bg-emerald-600 text-white' 
                           : message.read 
@@ -336,13 +335,13 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
             </ScrollArea>
             
             {/* Message input */}
-            <div className="border-t p-4 bg-gradient-to-r from-emerald-50 to-amber-50/50">
+            <div className="border-t p-2 sm:p-4 bg-gradient-to-r from-emerald-50 to-amber-50/50">
               <form onSubmit={handleSendMessage} className="flex items-center gap-2">
                 <Button 
                   type="button" 
                   variant="ghost" 
                   size="icon"
-                  className="text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700"
+                  className="text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 hidden sm:flex"
                 >
                   <Smile className="h-5 w-5" />
                 </Button>
@@ -357,7 +356,7 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
                         type="button" 
                         variant="ghost" 
                         size="icon" 
-                        className="h-8 w-8 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700"
+                        className="h-8 w-8 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 hidden sm:flex"
                       >
                         <PaperclipIcon className="h-4 w-4" />
                       </Button>
@@ -365,7 +364,7 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
                         type="button" 
                         variant="ghost" 
                         size="icon" 
-                        className="h-8 w-8 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700"
+                        className="h-8 w-8 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 hidden xs:flex"
                       >
                         <ImageIcon className="h-4 w-4" />
                       </Button>
@@ -373,7 +372,7 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
                         type="button" 
                         variant="ghost" 
                         size="icon" 
-                        className="h-8 w-8 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700"
+                        className="h-8 w-8 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 hidden sm:flex"
                       >
                         <FileText className="h-4 w-4" />
                       </Button>
