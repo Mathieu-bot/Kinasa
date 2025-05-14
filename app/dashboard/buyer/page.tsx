@@ -146,7 +146,7 @@ export default function BuyerDashboardPage() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="lg:col-span-4 border-0 overflow-hidden shadow-md hover:shadow-lg relative before:absolute before:inset-0 before:bg-gradient-to-br before:from-amber-300/20 before:via-teal-400/10 before:to-amber-200/20 before:z-0 transition-all duration-300">
+        <Card className="lg:col-span-4 overflow-hidden shadow-md  relative before:absolute before:inset-0 before:bg-gradient-to-br before:from-amber-300/20 before:via-teal-400/10 before:to-amber-200/20 before:z-0 transition-all duration-300 border border-emerald-300 hover:border-emerald-600 hover:shadow-xl">
           <CardHeader>
             <CardTitle>Recommended Products</CardTitle>
             <CardDescription>Based on your interests and previous purchases</CardDescription>
@@ -186,7 +186,7 @@ export default function BuyerDashboardPage() {
           </CardFooter>
         </Card>
 
-        <Card className="lg:col-span-3 border-0 overflow-hidden shadow-md hover:shadow-lg relative before:absolute before:inset-0 before:bg-gradient-to-br before:from-amber-300/20 before:via-teal-400/10 before:to-amber-200/20 before:z-0 transition-all duration-300">
+        <Card className="lg:col-span-3 overflow-hidden shadow-md  relative before:absolute before:inset-0 before:bg-gradient-to-br before:from-amber-300/20 before:via-teal-400/10 before:to-amber-200/20 before:z-0 transition-all duration-300 border border-emerald-300 hover:border-emerald-600 hover:shadow-xl">
           <CardHeader>
             <CardTitle>Market Trends</CardTitle>
             <CardDescription>Average price evolution</CardDescription>
