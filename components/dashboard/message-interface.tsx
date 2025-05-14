@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import { Send, Search, Phone, Video, MoreVertical, FileText, Image as ImageIcon, AtSign, PaperclipIcon, Smile } from "lucide-react"
+import { InputWithIcon } from "@/components/ui/input-with-icon"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -197,7 +198,7 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
       {/* Contacts list */}
       <div className="w-1/4 border-r bg-gradient-to-b from-emerald-50 to-amber-50/30">
         <div className="p-4 border-b">
-          <Input 
+          <InputWithIcon 
             placeholder="Search contacts..." 
             className="border-emerald-200 focus:border-emerald-500 focus:ring-0 focus:ring-offset-0"
             value={searchTerm}
@@ -346,38 +347,39 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
                   <Smile className="h-5 w-5" />
                 </Button>
                 <div className="relative flex-1">
-                  <Input
+                  <InputWithIcon
                     value={messageInput}
                     onChange={(e) => setMessageInput(e.target.value)}
                     placeholder="Type a message..."
-                    className="pr-24 border-emerald-200 focus:border-emerald-500 focus:ring-0 focus:ring-offset-0 outline-none"
+                    className="border-emerald-200 focus:border-emerald-500 focus:ring-0 focus:ring-offset-0 outline-none"
+                    suffix={<div className="flex items-center gap-1">
+                      <Button 
+                        type="button" 
+                        variant="ghost" 
+                        size="icon" 
+                        className="h-8 w-8 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700"
+                      >
+                        <PaperclipIcon className="h-4 w-4" />
+                      </Button>
+                      <Button 
+                        type="button" 
+                        variant="ghost" 
+                        size="icon" 
+                        className="h-8 w-8 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700"
+                      >
+                        <ImageIcon className="h-4 w-4" />
+                      </Button>
+                      <Button 
+                        type="button" 
+                        variant="ghost" 
+                        size="icon" 
+                        className="h-8 w-8 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700"
+                      >
+                        <FileText className="h-4 w-4" />
+                      </Button>
+                    </div>}
                   />
-                  <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                    <Button 
-                      type="button" 
-                      variant="ghost" 
-                      size="icon" 
-                      className="h-8 w-8 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700"
-                    >
-                      <PaperclipIcon className="h-4 w-4" />
-                    </Button>
-                    <Button 
-                      type="button" 
-                      variant="ghost" 
-                      size="icon" 
-                      className="h-8 w-8 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700"
-                    >
-                      <ImageIcon className="h-4 w-4" />
-                    </Button>
-                    <Button 
-                      type="button" 
-                      variant="ghost" 
-                      size="icon" 
-                      className="h-8 w-8 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700"
-                    >
-                      <FileText className="h-4 w-4" />
-                    </Button>
-                  </div>
+
                 </div>
                 <Button 
                   type="submit" 
