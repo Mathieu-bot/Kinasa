@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/ui/Footer";
@@ -18,6 +17,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { Navbar } from "./navbar";
+import { Product } from "./ui/ProductData";
 
 // Type for cart item
 interface CartItem {
@@ -46,7 +47,7 @@ const Shop = () => {
   }, [cartItems]);
 
   // Add item to cart
-  const addToCart = (product: CartItem) => {
+  const addToCart = (product: Product) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
 
@@ -105,6 +106,8 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
+      <Navbar />
+
       <ShopHero />
 
       <div className="container mx-auto px-4 py-8">
@@ -239,7 +242,7 @@ const Shop = () => {
                         <span className="w-6 text-center">{item.quantity}</span>
 
                         <button
-                          onClick={() => addToCart(item)}
+                          onClick={() => addToCart(item as any)}
                           className="p-1 rounded-full bg-grocer-green text-white hover:bg-grocer-green-dark"
                         >
                           <Plus className="h-4 w-4" />
