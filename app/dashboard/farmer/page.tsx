@@ -157,7 +157,7 @@ export default function FarmerDashboard() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="lg:col-span-3 border-0 overflow-hidden shadow-md hover:shadow-lg relative before:absolute before:inset-0 before:bg-gradient-to-br before:from-amber-300/20 before:via-teal-400/10 before:to-amber-200/20 before:z-0 transition-all duration-300">
+        <Card className="lg:col-span-3 overflow-hidden shadow-md relative before:absolute before:inset-0 before:bg-gradient-to-br before:from-amber-300/20 before:via-teal-400/10 before:to-amber-200/20 before:z-0 transition-all duration-300 border border-emerald-300 hover:border-emerald-600 hover:shadow-xl">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(59,130,246,0.05)_0%,rgba(16,185,129,0.08)_50%)] opacity-70 mix-blend-soft-light"></div>
           <CardHeader>
             <CardTitle>My Certifications</CardTitle>
@@ -184,7 +184,7 @@ export default function FarmerDashboard() {
             </Button>
           </CardFooter>
         </Card>
-        <Card className="lg:col-span-4 border-0 overflow-hidden shadow-md hover:shadow-lg relative before:absolute before:inset-0 before:bg-gradient-to-br before:from-amber-600/20 before:via-teal-400/10 before:to-amber-500/20 before:z-0 transition-all duration-300">
+        <Card className="lg:col-span-4 overflow-hidden shadow-md  relative before:absolute before:inset-0 before:bg-gradient-to-br before:from-amber-600/20 before:via-teal-400/10 before:to-amber-500/20 before:z-0 transition-all duration-300 border border-emerald-300 hover:border-emerald-600 hover:shadow-xl">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(59,130,246,0.08)_0%,rgba(16,185,129,0.05)_50%)] opacity-70 mix-blend-soft-light"></div>
           <CardHeader>
             <CardTitle>Best Selling Products</CardTitle>
