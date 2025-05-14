@@ -4,10 +4,9 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/ui/Footer";
 import ProductsDisplay from "@/components/ui/ProductsDisplay";
-import ShopHero from "@/components/shopHero";
 import ShopFilters from "@/components/shopFilters";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Filter, X, Plus, Minus, Trash2 } from "lucide-react";
+import { ShoppingCart, Filter, Plus, Minus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import {
   Drawer,
@@ -19,8 +18,41 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Navbar } from "./navbar";
 import { Product } from "./ui/ProductData";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+  DialogOverlay,
+} from "@radix-ui/react-dialog";
+import { DialogFooter, DialogHeader } from "./ui/dialog";
+import { InteractiveHoverButton } from "./ui/interactive-hover-button";
+
+// Hook personnalisé pour détecter la taille de l'écran
+function useBreakpoint() {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    // Fonction pour vérifier la taille de l'écran
+    const checkIsDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    // Vérification initiale
+    checkIsDesktop();
+
+    // Ajouter un écouteur pour les changements de taille
+    window.addEventListener("resize", checkIsDesktop);
+
+    // Nettoyer l'écouteur
+    return () => window.removeEventListener("resize", checkIsDesktop);
+  }, []);
+
+  return isDesktop;
+}
 
 // Type for cart item
 interface CartItem {
@@ -34,6 +66,7 @@ interface CartItem {
 const Shop = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const isDesktop = useBreakpoint();
 
   // Load cart items from localStorage on component mount
   useEffect(() => {
@@ -107,15 +140,11 @@ const Shop = () => {
   );
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar />
-
-      <ShopHero />
-
+    <div className="min-h-screen flex flex-col bg-transparent">
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-8">
           <motion.h1
-            className="text-3xl font-bold text-grocer-green"
+            className="text-3xl font-bold text-emerald-700"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -130,7 +159,7 @@ const Shop = () => {
           >
             <Button
               onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className="flex items-center gap-2 bg-grocer-green hover:bg-grocer-green-dark text-white"
+              className="flex items-center gap-2 bg-green-300 hover:bg-green-800 text-white"
               variant="default"
             >
               <Filter className="h-4 w-4" />
@@ -164,130 +193,261 @@ const Shop = () => {
         </div>
       </div>
 
-      <Drawer>
-        <DrawerTrigger asChild>
-          <motion.div
-            className="fixed bottom-6 right-6 z-50"
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button className="rounded-full h-16 w-16 bg-grocer-orange hover:bg-grocer-orange-dark shadow-lg">
-              <ShoppingCart className="h-6 w-6" />
-              {cartItemCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-grocer-green text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center">
-                  {cartItemCount}
-                </span>
-              )}
-            </Button>
-          </motion.div>
-        </DrawerTrigger>
+      {/* Use Dialog for desktop and Drawer for mobile/tablet */}
+      {isDesktop ? (
+        <Dialog>
+          <DialogTrigger asChild>
+            <motion.div
+              className="fixed bottom-4 right-4  "
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button className="fixed bottom-4 right-4 z-50 rounded-full h-16 w-16 bg-amber-100 hover:bg-amber-300 text-amber-700 shadow-lg">
+                <ShoppingCart className="h-6 w-6" />
+                {cartItemCount > 0 && (
+                  <span className="absolute -top-2 -right-2 z-10 text-white text-xs font-bold bg-red-300 rounded-full h-6 w-6 flex items-center justify-center">
+                    {cartItemCount}
+                  </span>
+                )}
+              </Button>
+            </motion.div>
+          </DialogTrigger>
+          <DialogOverlay className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40" />
+          <DialogContent className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-[425px] bg-amber-50 py-6 px-3 rounded-md shadow-xl overflow-x-hidden z-50">
+            <div className="mx-auto w-full ">
+              <DialogHeader>
+                <DialogTitle className="text-center text-xl font-bold">
+                  Your Cart
+                </DialogTitle>
+                <DialogDescription className="text-center">
+                  {cartItems.length === 0
+                    ? "Your cart is empty"
+                    : `You have ${cartItemCount} item${
+                        cartItemCount > 1 ? "s" : ""
+                      } in your cart`}
+                </DialogDescription>
+              </DialogHeader>
 
-        <DrawerContent className="max-h-[85vh] overflow-auto">
-          <div className="mx-auto w-full max-w-sm">
-            <DrawerHeader>
-              <DrawerTitle className="text-center text-xl font-bold">
-                Your Cart
-              </DrawerTitle>
-              <DrawerDescription className="text-center">
-                {cartItems.length === 0
-                  ? "Your cart is empty"
-                  : `You have ${cartItemCount} item${
-                      cartItemCount > 1 ? "s" : ""
-                    } in your cart`}
-              </DrawerDescription>
-            </DrawerHeader>
-
-            <div className="px-4">
-              {cartItems.length === 0 ? (
-                <div className="py-8 text-center">
-                  <ShoppingCart className="mx-auto h-12 w-12 text-gray-300 mb-3" />
-                  <p className="text-gray-500">
-                    Add some products to your cart!
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {cartItems.map((item) => (
-                    <motion.div
-                      key={item.id}
-                      className="flex items-center justify-between border-b pb-4"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, height: 0 }}
-                      layout
-                    >
-                      <div className="flex items-center">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-16 h-16 object-cover rounded"
-                        />
-                        <div className="ml-3">
-                          <h3 className="font-medium">{item.name}</h3>
-                          <p className="text-grocer-green font-bold">
-                            ${item.price.toFixed(2)}
-                          </p>
+              <div className="px-4">
+                {cartItems.length === 0 ? (
+                  <div className="py-8 text-center">
+                    <ShoppingCart className="mx-auto h-12 w-12 text-gray-300 mb-3" />
+                    <p className="text-gray-500">
+                      Add some products to your cart!
+                    </p>
+                  </div>
+                ) : (
+                  <div className="h-full max-h-[50vh] overflow-y-auto">
+                    {cartItems.map((item) => (
+                      <motion.div
+                        key={item.id}
+                        className="flex items-center justify-between border-b"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, height: 0 }}
+                        layout
+                      >
+                        <div className="flex items-center">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-16 h-16 object-cover rounded"
+                          />
+                          <div className="ml-3">
+                            <h3 className="font-medium">{item.name}</h3>
+                            <p className="bg-green-400 font-bold">
+                              ${item.price.toFixed(2)}
+                            </p>
+                          </div>
                         </div>
+
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => removeFromCart(item.id)}
+                            className="p-1 rounded-full bg-gray-100 hover:bg-gray-200"
+                          >
+                            <Minus className="h-4 w-4" />
+                          </button>
+
+                          <span className="p-1 px-3 text-center border rounded-full border-1 bg-slate-200">
+                            {item.quantity}
+                          </span>
+
+                          <button
+                            onClick={() => addToCart(item as any)}
+                            className="p-1 rounded-full bg-green-200 hover:text-green-200 text-green-800 hover:bg-green-800"
+                          >
+                            <Plus className="h-4 w-4" />
+                          </button>
+
+                          <button
+                            onClick={() => deleteFromCart(item.id)}
+                            className="ml-2 p-1 text-gray-400 hover:text-red-500 hover:scale-125"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </motion.div>
+                    ))}
+
+                    <div className="py-4 border-t">
+                      <div className="flex justify-between font-semibold">
+                        <span>Subtotal:</span>
+                        <span>${calculateTotal().toFixed(2)}</span>
                       </div>
-
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => removeFromCart(item.id)}
-                          className="p-1 rounded-full bg-gray-100 hover:bg-gray-200"
-                        >
-                          <Minus className="h-4 w-4" />
-                        </button>
-
-                        <span className="w-6 text-center">{item.quantity}</span>
-
-                        <button
-                          onClick={() => addToCart(item as any)}
-                          className="p-1 rounded-full bg-grocer-green text-white hover:bg-grocer-green-dark"
-                        >
-                          <Plus className="h-4 w-4" />
-                        </button>
-
-                        <button
-                          onClick={() => deleteFromCart(item.id)}
-                          className="ml-2 p-1 text-gray-400 hover:text-red-500"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
+                      <div className="flex justify-between text-sm text-gray-500 mt-1">
+                        <span>Shipping:</span>
+                        <span>Calculated at checkout</span>
                       </div>
-                    </motion.div>
-                  ))}
-
-                  <div className="py-4 border-t">
-                    <div className="flex justify-between font-semibold">
-                      <span>Subtotal:</span>
-                      <span>${calculateTotal().toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between text-sm text-gray-500 mt-1">
-                      <span>Shipping:</span>
-                      <span>Calculated at checkout</span>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
 
-              <DrawerFooter>
-                <Button
-                  disabled={cartItems.length === 0}
-                  className="w-full bg-grocer-green hover:bg-grocer-green-dark"
-                >
-                  Checkout (${calculateTotal().toFixed(2)})
-                </Button>
-                <DrawerClose asChild>
-                  <Button variant="outline">Continue Shopping</Button>
-                </DrawerClose>
-              </DrawerFooter>
+                <DialogFooter>
+                  <Button
+                    disabled={cartItems.length === 0}
+                    className="w-full bg-green-300 hover:bg-green-800"
+                  >
+                    Checkout (${calculateTotal().toFixed(2)})
+                  </Button>
+                  <DialogClose asChild>
+                    <Button variant="outline">Continue Shopping</Button>
+                  </DialogClose>
+                </DialogFooter>
+              </div>
             </div>
-          </div>
-        </DrawerContent>
-      </Drawer>
+          </DialogContent>
+        </Dialog>
+      ) : (
+        <Drawer>
+          <DrawerTrigger asChild>
+            <motion.div
+              className="fixed bottom-6 right-6 z-50"
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button className="rounded-full h-16 w-16 bg-amber-300 hover:bg-amber-300 shadow-lg">
+                <ShoppingCart className="h-6 w-6" />
+                {cartItemCount > 0 && (
+                  <span className="absolute -top-2 -right-2 min-sm:top-2 min-sm:right-2 text-white text-xs font-bold bg-red-300 rounded-full h-6 w-6 flex items-center justify-center ">
+                    {cartItemCount}
+                  </span>
+                )}
+              </Button>
+            </motion.div>
+          </DrawerTrigger>
+
+          <DrawerContent className="max-h-2/3">
+            <div className="mx-auto w-full max-w-sm">
+              <DrawerHeader>
+                <DrawerTitle className="text-center text-xl font-bold">
+                  Your Cart
+                </DrawerTitle>
+                <DrawerDescription className="text-center">
+                  {cartItems.length === 0
+                    ? "Your cart is empty"
+                    : `You have ${cartItemCount} item${
+                        cartItemCount > 1 ? "s" : ""
+                      } in your cart`}
+                </DrawerDescription>
+              </DrawerHeader>
+
+              <div className="px-4">
+                {cartItems.length === 0 ? (
+                  <div className="py-8 text-center">
+                    <ShoppingCart className="mx-auto h-12 w-12 text-gray-300 mb-3" />
+                    <p className="text-gray-500">
+                      Add some products to your cart!
+                    </p>
+                  </div>
+                ) : (
+                  <div className="h-full max-h-[50vh] overflow-y-auto">
+                    {cartItems.map((item) => (
+                      <motion.div
+                        key={item.id}
+                        className="flex items-center justify-between border-b"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, height: 0 }}
+                        layout
+                      >
+                        <div className="flex items-center">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-16 h-16 object-cover rounded"
+                          />
+                          <div className="ml-3">
+                            <h3 className="font-medium">{item.name}</h3>
+                            <p className="bg-green-400 font-bold">
+                              ${item.price.toFixed(2)}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => removeFromCart(item.id)}
+                            className="p-1 rounded-full bg-gray-100 hover:bg-gray-200"
+                          >
+                            <Minus className="h-4 w-4" />
+                          </button>
+
+                          <span className="p-1 px-3 text-center border rounded-full border-1 bg-slate-200">
+                            {item.quantity}
+                          </span>
+
+                          <button
+                            onClick={() => addToCart(item as any)}
+                            className="p-1 rounded-full bg-green-200 hover:text-green-200 text-green-800 hover:bg-green-800"
+                          >
+                            <Plus className="h-4 w-4" />
+                          </button>
+
+                          <button
+                            onClick={() => deleteFromCart(item.id)}
+                            className="ml-2 p-1 text-gray-400 hover:text-red-500 hover:scale-125"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </motion.div>
+                    ))}
+
+                    <div className="py-4 border-t">
+                      <div className="flex justify-between font-semibold">
+                        <span>Subtotal:</span>
+                        <span>${calculateTotal().toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between text-sm text-gray-500 mt-1">
+                        <span>Shipping:</span>
+                        <span>Calculated at checkout</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <DrawerFooter>
+                  <InteractiveHoverButton
+                    disabled={cartItems.length === 0}
+                    className="w-full bg-green-300 hover:bg-green-800"
+                    text={`Checkout ($${calculateTotal().toFixed(2)})`}
+                  />
+                  <DrawerClose asChild>
+                    <Button variant="outline">Continue Shopping</Button>
+                  </DrawerClose>
+                </DrawerFooter>
+              </div>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      )}
 
       <div className="mt-auto">
         <Footer />

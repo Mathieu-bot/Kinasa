@@ -77,10 +77,10 @@ const ProductsDisplay = ({ onAddToCart }: { onAddToCart: Function }) => {
           <Button
             variant={viewMode === "grid" ? "default" : "outline"}
             size="icon"
-            className={viewMode === "grid" ? "bg-grocer-green" : ""}
+            className={viewMode === "grid" ? "bg-grey-600" : ""}
             onClick={() => setViewMode("grid")}
           >
-            <Grid className="h-4 w-4" />
+            <Grid className="h-4 w-4 text-amber-700" />
           </Button>
           <Button
             variant={viewMode === "list" ? "default" : "outline"}
@@ -88,7 +88,7 @@ const ProductsDisplay = ({ onAddToCart }: { onAddToCart: Function }) => {
             className={viewMode === "list" ? "bg-grocer-green" : ""}
             onClick={() => setViewMode("list")}
           >
-            <List className="h-4 w-4" />
+            <List className="h-4 w-4 text-amber-700" />
           </Button>
         </div>
 
@@ -114,7 +114,7 @@ const ProductsDisplay = ({ onAddToCart }: { onAddToCart: Function }) => {
         animate="show"
         className={
           viewMode === "grid"
-            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            ? "grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6"
             : "space-y-4"
         }
       >
@@ -148,8 +148,8 @@ const ProductsDisplay = ({ onAddToCart }: { onAddToCart: Function }) => {
             variant={currentPage === index + 1 ? "default" : "outline"}
             className={`px-4 py-2 rounded-full ${
               currentPage === index + 1
-                ? "bg-grocer-green hover:bg-grocer-green-dark font-bold"
-                : "border-grocer-green text-grocer-green hover:bg-grocer-green/10"
+                ? "bg-green-300 hover:bg-emerald-700 font-bold"
+                : "border-green-300 text-emerald-700 hover:bg-grocer-green/10"
             }`}
             onClick={() => changePage(index + 1)}
           >
