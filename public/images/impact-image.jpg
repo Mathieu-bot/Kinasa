@@ -1,0 +1,13 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#2ECC40" />
+  <circle cx="400" cy="200" r="100" fill="#FFFFFF" opacity="0.3" />
+  <rect x="200" y="350" width="400" height="30" rx="15" fill="#FFFFFF" opacity="0.7" />
+  <rect x="200" y="400" width="300" height="30" rx="15" fill="#FFFFFF" opacity="0.5" />
+  <rect x="200" y="450" width="350" height="30" rx="15" fill="#FFFFFF" opacity="0.6" />
+  <text x="50%" y="150" font-family="Arial" font-size="36" text-anchor="middle" fill="#FFF">
+    Notre impact social
+  </text>
+  <text x="50%" y="550" font-family="Arial" font-size="24" text-anchor="middle" fill="#FFF">
+    Statistiques et résultats positifs
+  </text>
+</svg> 
