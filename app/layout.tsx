@@ -3,7 +3,6 @@ import { ThemeProvider } from "@/components/layout/theme-provider";
 import "./globals.css";
 import type { Metadata } from "next";
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
-import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 

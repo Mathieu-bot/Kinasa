@@ -1,6 +1,7 @@
 "use client"
 
-import { Bell, ChevronDown, User, Settings } from "lucide-react"
+import { usePathname } from "next/navigation"
+import { Bell, ChevronDown, User, Settings, MessageSquare, Package, ShoppingCart, BarChart3, Users, Award, Home } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -31,8 +32,46 @@ export function DashboardHeader({
   onMenuToggle,
   onMenuClick
 }: HeaderProps) {
-  // To ensure compatibility between old and new implementations
-  const titleValue = title || (userType === "buyer" ? "Buyer Dashboard" : "Farmer Dashboard")
+  const pathname = usePathname()
+  
+  // Detect user type from the current path
+  const detectedUserType = pathname?.includes('/buyer') ? 'buyer' : 'farmer'
+  const finalUserType = userType || detectedUserType
+  
+  const getPageTitle = () => {
+    if (title) return title
+    
+    if (pathname === `/dashboard/${finalUserType}`) {
+      return finalUserType === 'buyer' ? 'Buyer Dashboard' : 'Farmer Dashboard'
+    }
+    
+    if (pathname?.includes('/messages')) return 'Messages'
+    if (pathname?.includes('/products')) return finalUserType === 'buyer' ? 'Market' : 'Products'
+    if (pathname?.includes('/orders')) return 'Orders'
+    if (pathname?.includes('/analytics')) return 'Analytics'
+    if (pathname?.includes('/network')) return 'My Network'
+    if (pathname?.includes('/certifications')) return 'Certifications'
+    if (pathname?.includes('/settings')) return 'Settings'
+    
+    // Default fallback
+    return finalUserType === 'buyer' ? 'Buyer Dashboard' : 'Farmer Dashboard'
+  }
+  
+  // Get the icon for the current page
+  const getPageIcon = () => {
+    if (pathname === `/dashboard/${finalUserType}`) return Home
+    if (pathname?.includes('/messages')) return MessageSquare
+    if (pathname?.includes('/products')) return Package
+    if (pathname?.includes('/orders')) return ShoppingCart
+    if (pathname?.includes('/analytics')) return BarChart3
+    if (pathname?.includes('/network')) return Users
+    if (pathname?.includes('/certifications')) return Award
+    if (pathname?.includes('/settings')) return Settings
+    return Home
+  }
+  
+  const PageIcon = getPageIcon()
+  const titleValue = getPageTitle()
   const userNameValue = userName || "User"
   const userInitials = avatarFallback || userNameValue.substring(0, 2).toUpperCase()
   const handleMenuToggle = onMenuToggle || onMenuClick || (() => {})
@@ -62,7 +101,13 @@ export function DashboardHeader({
         <span className="sr-only">Toggle Menu</span>
       </Button>
       <div className="w-full flex-1">
-        <h1 className="text-lg font-semibold text-emerald-800">{titleValue}</h1>
+        <div className="flex items-center gap-2">
+          <PageIcon className="h-5 w-5 text-emerald-600" />
+          <h1 className="text-lg font-semibold text-emerald-800">{titleValue}</h1>
+        </div>
+        {pathname?.includes('/messages') && (
+          <p className="text-xs text-muted-foreground ml-7">Connect with your {finalUserType === 'buyer' ? 'suppliers' : 'customers'}</p>
+        )}
       </div>
       <div className="flex items-center gap-2">
         <Button variant="outline" size="icon" className="bg-amber-100 border-amber-200 hover:bg-amber-200">
