@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Globe, Home, MessageSquare, Package, Settings, ShoppingCart, BarChart3, Users, Award, X } from "lucide-react"
+import { Globe, Home, MessageSquare, Package, Settings, ShoppingCart, BarChart3, Users, Award, X, DollarSign } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
@@ -92,6 +92,30 @@ export function DashboardSidebar({ type, userType, isMobileOpen = false, onMobil
           >
             <BarChart3 className="h-4 w-4" />
             Analytics
+          </Link>
+          <Link
+            href="/dashboard/fair-pricing"
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${isActive('/dashboard/fair-pricing') ? 'bg-emerald-600 text-white' : 'text-amber-50 hover:bg-emerald-600/50'}`}
+            onClick={handleLinkClick}
+          >
+            <DollarSign className="h-4 w-4" />
+            Fair Pricing
+          </Link>
+          <Link
+            href={isFramer ? `/dashboard/farmer/logistics` : `/dashboard/logistics`}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${isActive('/dashboard/logistics') || isActive('/dashboard/farmer/logistics') ? 'bg-emerald-600 text-white' : 'text-amber-50 hover:bg-emerald-600/50'}`}
+            onClick={handleLinkClick}
+          >
+            <Package className="h-4 w-4" />
+            {isFramer ? "Shipments & Income" : "Payments & Logistics"}
+          </Link>
+          <Link
+            href={isFramer ? `/dashboard/farmer/negotiations` : `/dashboard/negotiations`}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${isActive('/dashboard/negotiations') || isActive('/dashboard/farmer/negotiations') ? 'bg-emerald-600 text-white' : 'text-amber-50 hover:bg-emerald-600/50'}`}
+            onClick={handleLinkClick}
+          >
+            <MessageSquare className="h-4 w-4" />
+            {isFramer ? "Price Negotiations" : "Quotes & Negotiations"}
           </Link>
           {isFramer ? (
             <>
