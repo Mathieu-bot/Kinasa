@@ -23,7 +23,6 @@ interface CalendarEventsProps {
 }
 
 export function CalendarEvents({ events }: CalendarEventsProps) {
-  // Assurer que le titre est en anglais selon la préférence utilisateur
   const title = "Calendar";
   const subtitle = "Upcoming events";
   
