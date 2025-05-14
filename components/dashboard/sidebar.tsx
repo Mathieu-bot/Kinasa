@@ -70,8 +70,8 @@ export function DashboardSidebar({ type, userType, isMobileOpen = false, onMobil
             <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">3</Badge>
           </Link>
           <Link
-            href={`${basePath}/products`}
-            className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${isActive(`${basePath}/products`) ? 'bg-emerald-600 text-white' : 'text-amber-50 hover:bg-emerald-600/50'}`}
+            href={isFramer ? `${basePath}/products` : `/dashboard/market`}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${isFramer ? isActive(`${basePath}/products`) : isActive('/dashboard/market') ? 'bg-emerald-600 text-white' : 'text-amber-50 hover:bg-emerald-600/50'}`}
             onClick={handleLinkClick}
           >
             <Package className="h-4 w-4" />
