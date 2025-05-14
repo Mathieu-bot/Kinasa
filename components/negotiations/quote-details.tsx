@@ -49,6 +49,7 @@ export interface QuoteDetailsProps {
     type: "farmer" | "buyer"
   }
   fairPriceInfo?: {
+    id: string
     fairPricePerUnit: number
     percentAboveFairPrice: number
   }[]
