@@ -1,9 +1,10 @@
-"use client"
+ "use client"
 
 import { usePathname } from "next/navigation"
-import { Bell, ChevronDown, User, Settings, MessageSquare, Package, ShoppingCart, BarChart3, Users, Award, Home } from "lucide-react"
+import { Bell, ChevronDown, User, Settings, MessageSquare, Package, ShoppingCart, BarChart3, Users, Award, Home, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { GlobalSearch } from "@/components/search/global-search"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,7 +36,7 @@ export function DashboardHeader({
   const pathname = usePathname()
   
   // Detect user type from the current path
-  const detectedUserType = pathname?.includes('/buyer') ? 'buyer' : 'farmer'
+  const detectedUserType = pathname?.includes('/farmer') ? 'farmer' : 'buyer'
   const finalUserType = userType || detectedUserType
   
   const getPageTitle = () => {
@@ -66,6 +67,7 @@ export function DashboardHeader({
     if (pathname?.includes('/analytics')) return BarChart3
     if (pathname?.includes('/network')) return Users
     if (pathname?.includes('/certifications')) return Award
+    if (pathname?.includes('/logistics')) return Package
     if (pathname?.includes('/settings')) return Settings
     return Home
   }
@@ -110,6 +112,7 @@ export function DashboardHeader({
         )}
       </div>
       <div className="flex items-center gap-2">
+        <GlobalSearch />
         <Button variant="outline" size="icon" className="bg-amber-100 border-amber-200 hover:bg-amber-200">
           <Bell className="h-5 w-5" />
           <span className="sr-only">Notifications</span>
@@ -133,16 +136,24 @@ export function DashboardHeader({
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <User className="mr-2 h-4 w-4" />
-              Profile
+            <DropdownMenuItem asChild>
+              <a href={finalUserType === 'farmer' ? '/farmer-profil' : '/dashboard/profile'}>
+                <User className="mr-2 h-4 w-4" />
+                Profile
+              </a>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings className="mr-2 h-4 w-4" />
-              Settings
+            <DropdownMenuItem asChild>
+              <a href={`/dashboard/${finalUserType}/settings`}>
+                <Settings className="mr-2 h-4 w-4" />
+                Settings
+              </a>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a href="/api/auth/signout">
+                Logout
+              </a>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
