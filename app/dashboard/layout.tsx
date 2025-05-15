@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSession } from "next-auth/react"
 import { DashboardSidebar } from "@/components/dashboard/sidebar"
 import { DashboardHeader } from "@/components/dashboard/header"
 
@@ -13,11 +14,19 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children, params }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { data: session } = useSession()
   
   const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
   const userType = pathname.includes('/buyer') ? 'buyer' : 'farmer';
-  const avatarFallback = userType === 'buyer' ? 'BA' : 'CA';
-  const userName = userType === 'buyer' ? 'Bean Adventures' : 'Coffee Altura';
+  
+  const userName = session?.user?.name || (userType === 'buyer' ? 'Buyer' : 'Farmer');
+  const userEmail = session?.user?.email;
+  
+
+  const avatarFallback = userName ? userName.substring(0, 2).toUpperCase() : (userType === 'buyer' ? 'BY' : 'FR');
+  
+  const userRole = session?.user?.role || userType;
+  
   const title = userType === 'buyer' ? 'Buyer Dashboard' : 'Farmer Dashboard';
   
   return (
@@ -35,6 +44,8 @@ export default function DashboardLayout({ children, params }: DashboardLayoutPro
           title={title} 
           avatarFallback={avatarFallback} 
           userName={userName} 
+          userRole={userRole}
+          userType={userType}
           onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
         />
         <main className="flex-1 overflow-auto p-4 md:p-6 bg-gradient-to-br from-amber-50/50 to-emerald-50/50">
