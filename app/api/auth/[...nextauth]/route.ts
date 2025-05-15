@@ -11,6 +11,7 @@ declare module "next-auth" {
   interface Session {
     user: {
       id: string;
+      role?: string;
     } & DefaultSession["user"];
     accessToken?: string;
   }
@@ -77,10 +78,14 @@ export const authOptions: AuthOptions = {
     },
     async session({ session, token }) {
       session.user.id = token.sub || "";
+      session.user.role = token.role as string;
       session.accessToken = token.accessToken as string;
       return session;
     },
     async jwt({ token, user, account }) {
+      if (user) {
+        token.role = user.role;
+      }
       if (account) {
         token.accessToken = account.access_token;
         token.sub = user?.id || token.sub;
