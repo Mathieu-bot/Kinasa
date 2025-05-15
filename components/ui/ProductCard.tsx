@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Heart, Plus, Minus, MapPin, User } from "lucide-react";
 import { toast } from "sonner";
-import { useCartStore } from "@/lib/store/useCartStore";
-import { Product } from "./ProductData";
 
 interface ProductCardProps {
   id: number;
@@ -17,6 +15,7 @@ interface ProductCardProps {
   category: string;
   isNew?: boolean;
   rating: number;
+  onAddToCart?: () => void;
   producer?: string;
   region?: string;
 }
@@ -30,48 +29,32 @@ const ProductCard: React.FC<ProductCardProps> = ({
   category,
   isNew = false,
   rating,
+  onAddToCart,
   producer,
   region,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-
-  // Utiliser le store Zustand
-  const { addItem, decrementItem, items } = useCartStore();
-
-  // Récupérer la quantité de ce produit dans le panier
-  const cartItem = items.find((item) => item.id === id);
-  const quantity = cartItem ? cartItem.quantity : 0;
+  const [quantity, setQuantity] = useState(0);
 
   const handleAddToCart = () => {
-    // Créer un objet produit à partir des props
-    const product: Product = {
-      id,
-      name,
-      price,
-      oldPrice,
-      image,
-      category,
-      isNew,
-      rating,
-      producer,
-      region,
-    };
-
-    addItem(product);
-    toast.success(`${name} added to cart!`);
+    setQuantity(quantity + 1);
+    if (onAddToCart) {
+      onAddToCart();
+    } else {
+      toast.success(`${name} added to cart!`);
+    }
   };
 
   const handleRemoveFromCart = () => {
     if (quantity > 0) {
-      decrementItem(id);
+      setQuantity(quantity - 1);
       toast.info(`${name} removed from cart.`);
     }
   };
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
-
     toast(
       isFavorite
         ? `${name} removed from favorites.`
@@ -215,14 +198,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="rounded-full shadow shadow-amber-500 text-amber-700 h-7 w-7 flex items-center justify-center mr-2"
+                  className="rounded-full bg-grocer-green text-white h-7 w-7 flex items-center justify-center mr-2"
                   onClick={handleRemoveFromCart}
                 >
-                  <Minus className="h-4 w-4" />
+                  <Minus className="h-3 w-3" />
                 </motion.button>
 
                 <motion.span
-                  className="font-semibold mx-auto pr-2"
+                  className="font-semibold mx-1"
                   key={quantity}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -235,7 +218,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="rounded-full bg-amber-300 hover:bg-amber-600 text-white h-9 w-9 flex items-center justify-center"
+              className="rounded-full bg-grocer-green hover:bg-grocer-green-dark text-white h-9 w-9 flex items-center justify-center"
               onClick={handleAddToCart}
             >
               {quantity === 0 ? (
@@ -247,6 +230,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
       </div>
+
+      {isHovered && (
+        <motion.div
+          className="absolute inset-x-0 bottom-0 bg-grocer-green text-white text-center py-2 cursor-pointer"
+          initial={{ y: 40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 300 }}
+          onClick={handleAddToCart}
+        >
+          View Details
+        </motion.div>
+      )}
     </motion.div>
   );
 };
