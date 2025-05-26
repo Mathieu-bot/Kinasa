@@ -10,9 +10,7 @@ const nextConfig = {
     unoptimized: true,
   },
   transpilePackages: ['@react-pdf/renderer', 'react-pdf', 'react-pdf/dist/cjs'],
-  experimental: {
-    esmExternals: 'loose',
-  },
+
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
