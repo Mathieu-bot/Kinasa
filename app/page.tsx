@@ -27,6 +27,6 @@ export default function HomePage() {
       <CtaSection />
       <FaqSection />
       <Footer />
-    </>
+    </div>
   );
 }
