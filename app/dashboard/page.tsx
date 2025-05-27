@@ -14,18 +14,21 @@ export default function DashboardRedirect() {
     if (status === "loading") return
     
     if (!session) {
-      router.push("/login")
+      router.push("/auth/login")
       return
     }
 
-    const userRole = session?.user?.role
+    const userRole = (session?.user as any)?.role
+    
+    console.log("Session user data:", session?.user)
     
     if (userRole === "FARMER") {
       router.push("/dashboard/farmer")
     } else if (userRole === "BUYER") {
       router.push("/dashboard/buyer")
     } else {
-      console.warn("Unknown user role:", userRole)
+      console.warn("Unknown or missing user role:", userRole)
+      // Default to farmer dashboard if role is missing
       router.push("/dashboard/farmer")
     }
   }, [router, session, status])
