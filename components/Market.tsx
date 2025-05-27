@@ -7,7 +7,7 @@ import ProductsDisplay from "@/components/ui/ProductsDisplay";
 import ShopHero from "@/components/shopHero";
 import ShopFilters from "@/components/shopFilters";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Filter, X, Plus, Minus, Trash2 } from "lucide-react";
+import { ShoppingCart, Filter, Plus, Minus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import {
   Drawer,
