@@ -1,23 +1,22 @@
-import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/components/layout/theme-provider";
-import "./globals.css";
-import type { Metadata } from "next";
-import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
-import AuthProvider from "@/components/auth-provider";
+import type React from "react"
+import { Metadata } from "next/types"
+import "./globals.css"
+import { Inter } from "next/font/google"
+import { Navbar } from "@/components/navbar"
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Kinasa - Commerce équitable pour agriculteurs",
+  title: "Kinasa - Fair Trade for Farmers",
   description:
-    "Plateforme de commerce équitable connectant les petits producteurs des pays en développement avec des acheteurs internationaux.",
+    "Fair trade platform connecting small producers from developing countries with international buyers.",
   keywords: [
-    "commerce équitable",
+    "fair trade",
     "agriculture",
-    "agriculteurs",
-    "producteurs",
-    "développement durable",
-    "commerce international",
+    "farmers",
+    "producers",
+    "sustainable development",
+    "international trade",
   ],
 };
 
@@ -27,21 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <AuthProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <div className="w-full relative z-0 overflow-x-hidden">
-              <div className="z-2 pt-14">{children}</div>
-              <AnimatedGridPattern className="w-full blur-xs h-full -z-10"></AnimatedGridPattern>
-            </div>
-          </ThemeProvider>
-        </AuthProvider>
+    <html lang="en">
+      <body className={`${inter.className} bg-white text-gray-900 min-h-screen`}>
+        <Navbar />
+        {children}
       </body>
     </html>
   );

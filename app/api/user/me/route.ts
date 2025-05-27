@@ -5,12 +5,20 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
+<<<<<<< HEAD
+=======
+    // Récupération de la session
+>>>>>>> 729b825 (fix : create useCardStore.tsx)
     const session = await getServerSession(authOptions);
 
     if (!session || !session.user) {
       return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
     }
 
+<<<<<<< HEAD
+=======
+    // Récupération de l'utilisateur à partir de l'ID dans la session
+>>>>>>> 729b825 (fix : create useCardStore.tsx)
     const user = await prisma.user.findUnique({
       where: {
         id: session.user.id,
