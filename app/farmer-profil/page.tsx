@@ -138,7 +138,7 @@ export default function FarmerProfile() {
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <p className="text-xl">Chargement des informations...</p>
+        <p className="text-xl">Loading information...</p>
       </div>
     );
   }
@@ -146,15 +146,15 @@ export default function FarmerProfile() {
   if (!cooperative) {
     return (
       <div className="flex h-screen flex-col items-center justify-center space-y-4">
-        <p className="text-xl">Aucune coopérative associée à votre compte.</p>
+        <p className="text-xl">No cooperative associated with your account.</p>
         <Button className="bg-green-700 hover:bg-green-800">
-          Créer votre profil
+          Create your profile
         </Button>
       </div>
     );
   }
 
-  // Formatter les étoiles pour la note moyenne
+  // Format stars for average rating
   const renderStars = (note: number) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -181,7 +181,7 @@ export default function FarmerProfile() {
             <div className="relative h-32 w-32 overflow-hidden rounded-full">
               <Image
                 src={
-                  cooperative.photo_profil ||
+                  cooperative?.photo_profil ||
                   "/placeholder.svg?height=128&width=128"
                 }
                 alt="Photo de profil"
@@ -222,7 +222,7 @@ export default function FarmerProfile() {
               </div>
               <Button className="w-full bg-green-700 hover:bg-green-800">
                 <MessageSquare className="mr-2 h-4 w-4" />
-                Contacter
+                Contact
               </Button>
             </div>
 
@@ -230,47 +230,47 @@ export default function FarmerProfile() {
               <CardHeader>
                 <CardTitle>Certifications</CardTitle>
                 <CardDescription>
-                  Vérifiées par des organismes indépendants
+                  Verified by independent organizations
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm text-gray-600">
-                  {products[0]?.description}
+                  {products.length > 0 ? products[0]?.description : ""}
                 </p>
                 <div className="flex justify-between">
-                  <span className="font-medium">Prix plancher:</span>
+                  <span className="font-medium">Floor price:</span>
                   <span className="font-bold text-green-700">
-                    {products[0]?.prix_plancher?.toFixed(2)} € / kg
+                    {products.length > 0 ? products[0]?.prix_plancher?.toFixed(2) : "0.00"} € / kg
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-medium">Disponibilité:</span>
-                  <span>{products[0]?.periode_disponibilite}</span>
+                  <span className="font-medium">Availability:</span>
+                  <span>{products.length > 0 ? products[0]?.periode_disponibilite : ""}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-medium">Commande minimum:</span>
-                  <span>{products[0]?.commande_minimum} kg</span>
+                  <span className="font-medium">Minimum order:</span>
+                  <span>{products.length > 0 ? products[0]?.commande_minimum : "0"} kg</span>
                 </div>
               </CardContent>
               <Button className="mt-4 w-full bg-green-700 hover:bg-green-800">
-                Demander un devis
+                Request a quote
               </Button>
             </Card>
           </div>
 
           <Tabs>
             <TabsList>
-              <TabsTrigger value="products">Produits</TabsTrigger>
-              <TabsTrigger value="pricing">Prix</TabsTrigger>
-              <TabsTrigger value="reviews">Avis</TabsTrigger>
+              <TabsTrigger value="products">Products</TabsTrigger>
+              <TabsTrigger value="pricing">Pricing</TabsTrigger>
+              <TabsTrigger value="reviews">Reviews</TabsTrigger>
             </TabsList>
 
             <TabsContent value="products" className="space-y-6 pt-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Produits</CardTitle>
+                  <CardTitle>Products</CardTitle>
                   <CardDescription>
-                    Liste des produits proposés par la coopérative
+                    List of products offered by the cooperative
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -281,17 +281,17 @@ export default function FarmerProfile() {
                         {produit.description}
                       </p>
                       <div className="flex justify-between">
-                        <span className="font-medium">Prix plancher:</span>
+                        <span className="font-medium">Floor price:</span>
                         <span className="font-bold text-green-700">
                           {produit.prix_plancher?.toFixed(2)} € / kg
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="font-medium">Disponibilité:</span>
+                        <span className="font-medium">Availability:</span>
                         <span>{produit.periode_disponibilite}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="font-medium">Commande minimum:</span>
+                        <span className="font-medium">Minimum order:</span>
                         <span>{produit.commande_minimum} kg</span>
                       </div>
                     </div>
@@ -304,10 +304,10 @@ export default function FarmerProfile() {
             <TabsContent value="pricing" className="space-y-6 pt-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Transparence des prix</CardTitle>
+                  <CardTitle>Price Transparency</CardTitle>
                   <CardDescription>
-                    Comprendre comment le prix final est réparti entre les
-                    différents acteurs de la chaîne
+                    Understand how the final price is distributed among
+                    different actors in the supply chain
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -315,54 +315,54 @@ export default function FarmerProfile() {
                     <PriceBreakdownChart />
                   </div>
                   <div className="mt-6 space-y-4">
-                    {products.length > 0 && products[0].structure_prix && (
+                    {products.length > 0 && products[0]?.structure_prix && (
                       <>
                         <div className="rounded-lg bg-gray-50 p-4">
                           <h3 className="font-medium">
-                            Prix payé au producteur:{" "}
-                            {products[0].structure_prix.prix_producteur?.toFixed(
+                            Price paid to producer:{" "}
+                            {products[0]?.structure_prix?.prix_producteur?.toFixed(
                               2
-                            )}{" "}
+                            ) || "0.00"}{" "}
                             € / kg
                           </h3>
                           <p className="text-sm text-gray-600">
-                            {products[0].structure_prix.details_producteur}
+                            {products[0]?.structure_prix?.details_producteur || ""}
                           </p>
                         </div>
                         <div className="rounded-lg bg-gray-50 p-4">
                           <h3 className="font-medium">
-                            Coûts de certification et contrôle qualité:{" "}
-                            {products[0].structure_prix.couts_certification?.toFixed(
+                            Certification costs and quality control:{" "}
+                            {products[0]?.structure_prix?.couts_certification?.toFixed(
                               2
-                            )}{" "}
+                            ) || "0.00"}{" "}
                             € / kg
                           </h3>
                           <p className="text-sm text-gray-600">
-                            {products[0].structure_prix.details_certification}
+                            {products[0]?.structure_prix?.details_certification || ""}
                           </p>
                         </div>
                         <div className="rounded-lg bg-gray-50 p-4">
                           <h3 className="font-medium">
-                            Frais de logistique et transport:{" "}
-                            {products[0].structure_prix.frais_logistique?.toFixed(
+                            Logistics and transport fees:{" "}
+                            {products[0]?.structure_prix?.frais_logistique?.toFixed(
                               2
-                            )}{" "}
+                            ) || "0.00"}{" "}
                             € / kg
                           </h3>
                           <p className="text-sm text-gray-600">
-                            {products[0].structure_prix.details_logistique}
+                            {products[0]?.structure_prix?.details_logistique || ""}
                           </p>
                         </div>
                         <div className="rounded-lg bg-gray-50 p-4">
                           <h3 className="font-medium">
-                            Frais de la plateforme:{" "}
-                            {products[0].structure_prix.frais_plateforme?.toFixed(
+                            Platform fees:{" "}
+                            {products[0]?.structure_prix?.frais_plateforme?.toFixed(
                               2
-                            )}{" "}
+                            ) || "0.00"}{" "}
                             € / kg
                           </h3>
                           <p className="text-sm text-gray-600">
-                            {products[0].structure_prix.details_plateforme}
+                            {products[0]?.structure_prix?.details_plateforme || ""}
                           </p>
                         </div>
                       </>
@@ -398,11 +398,11 @@ export default function FarmerProfile() {
                         <div className="flex-1">
                           <div className="flex items-center justify-between">
                             <h3 className="font-medium">
-                              {avis.nom_acheteur}, {avis.pays_acheteur}
+                              {avis.nom_acheteur || "Buyer"}, {avis.pays_acheteur || "Unknown"}
                             </h3>
                             <span className="text-sm text-gray-600">
                               {new Date(avis.date_avis).toLocaleDateString(
-                                "fr",
+                                "en-US",
                                 {
                                   day: "numeric",
                                   month: "long",
@@ -422,9 +422,9 @@ export default function FarmerProfile() {
                     ))}
                   </div>
 
-                  {avis.length > 3 && (
+                  {reviews.length > 3 && (
                     <Button variant="outline" className="w-full">
-                      Voir plus d'avis
+                      See more reviews
                     </Button>
                   )}
                 </CardContent>
