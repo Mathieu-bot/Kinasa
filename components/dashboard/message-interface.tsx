@@ -147,7 +147,6 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
     setMessages(simulatedMessages)
   }
 
-  // Handle sending a new message
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault()
     
