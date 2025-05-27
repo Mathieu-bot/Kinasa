@@ -28,7 +28,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <Providers>
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
@@ -42,7 +41,6 @@ export default function RootLayout({
               <AnimatedGridPattern className="w-full bg-slate-300 blur-sm h-full z-1"></AnimatedGridPattern>
             </div>
           </ThemeProvider>
-        </Providers>
       </body>
     </html>
   );
