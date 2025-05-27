@@ -18,6 +18,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { Navbar } from "./navbar";
 
 // Type for cart item
 interface CartItem {
