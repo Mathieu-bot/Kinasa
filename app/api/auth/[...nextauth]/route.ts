@@ -33,13 +33,16 @@ export const authOptions: AuthOptions = {
       clientId: process.env.FACEBOOK_CLIENT_ID || "",
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET || "",
     }),
-    CredentialsProvider({
+    CredentialsProvider<{
+      email: { label: string; type: string };
+      password: { label: string; type: string };
+    }>({
       name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials) {
+      async authorize(credentials, req): Promise<any> {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Email and password required");
         }
