@@ -56,22 +56,22 @@ export function DashboardHeader({
   )
 
   return (
-    <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:px-6">
-      <Button variant="outline" size="icon" className="md:hidden" onClick={handleMenuToggle}>
+    <header className="fixed top-0 right-0 left-0 md:left-[240px] flex h-14 items-center gap-4 border-b bg-gradient-to-r from-amber-50 to-amber-100 shadow-md px-4 lg:px-6 z-10">
+      <Button variant="outline" size="icon" className="md:hidden bg-amber-100 border-amber-200 hover:bg-amber-200" onClick={handleMenuToggle}>
         <MenuIcon />
         <span className="sr-only">Toggle Menu</span>
       </Button>
       <div className="w-full flex-1">
-        <h1 className="text-lg font-semibold">{titleValue}</h1>
+        <h1 className="text-lg font-semibold text-emerald-800">{titleValue}</h1>
       </div>
       <div className="flex items-center gap-2">
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" className="bg-amber-100 border-amber-200 hover:bg-amber-200">
           <Bell className="h-5 w-5" />
           <span className="sr-only">Notifications</span>
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="gap-1">
+            <Button variant="outline" size="sm" className="gap-1 bg-amber-100 border-amber-200 hover:bg-amber-200">
               <Avatar className="h-6 w-6">
                 <AvatarImage src="/placeholder.svg?height=32&width=32" alt="Avatar" />
                 <AvatarFallback>{userInitials}</AvatarFallback>

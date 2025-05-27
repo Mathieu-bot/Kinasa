@@ -40,7 +40,7 @@ export default function RootLayout({
               <div className="z-2 pt-14 bg-gradient-to-tr to-white from-emerald-300 dark:from-emerald-950 ">
                 {children}
               </div>
-              {/* <AnimatedGridPattern className="w-full bg-slate-300 blur-sm h-full z-1"></AnimatedGridPattern> */}
+              <AnimatedGridPattern className="w-full bg-slate-300 blur-sm h-full z-1"></AnimatedGridPattern>
             </div>
           </ThemeProvider>
         </Providers>
