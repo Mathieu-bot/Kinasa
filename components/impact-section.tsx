@@ -121,6 +121,7 @@ export function ImpactSection() {
           <div className="space-y-4">
             <div className="bg-gray-100 h-64 rounded-lg overflow-hidden relative">
               <Image
+                alt="Impact Image"
                 src="https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2015/5/15/1431698013780/5dd84ee7-d1da-4d8b-95fb-b292a284d283-2060x1236.jpeg?width=1900&dpr=1&s=none&crop=none"
                 width={200}
                 height={256}

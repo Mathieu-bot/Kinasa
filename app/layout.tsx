@@ -8,16 +8,16 @@ import AuthProvider from "@/components/auth-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Kinasa - Commerce équitable pour agriculteurs",
+  title: "Kinasa - Fair Trade for Farmers",
   description:
-    "Plateforme de commerce équitable connectant les petits producteurs des pays en développement avec des acheteurs internationaux.",
+    "Fair trade platform connecting small producers from developing countries with international buyers.",
   keywords: [
-    "commerce équitable",
+    "fair trade",
     "agriculture",
-    "agriculteurs",
-    "producteurs",
-    "développement durable",
-    "commerce international",
+    "farmers",
+    "producers",
+    "sustainable development",
+    "international trade",
   ],
 };
 

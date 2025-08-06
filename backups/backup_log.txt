@@ -1,0 +1,20 @@
+----------------------
+Démarrage de la sauvegarde: Thu May 15 02:34:00 AM EAT 2025
+Sauvegarde réussie: /home/tafita/Kinasa/backups/kinasa_backup_2025-05-15_02-34-00.sql
+Fichier compressé: /home/tafita/Kinasa/backups/kinasa_backup_2025-05-15_02-34-00.sql.gz
+Nettoyage des sauvegardes de plus de 30 jours effectué
+Sauvegarde terminée: Thu May 15 02:34:05 AM EAT 2025
+----------------------
+----------------------
+Démarrage de la sauvegarde: Thu May 15 02:39:04 AM EAT 2025
+ERREUR: La sauvegarde a échoué
+----------------------
+Démarrage de la sauvegarde: Thu May 15 02:44:42 AM EAT 2025
+Sauvegarde réussie: /home/tafita/Kinasa/backups/kinasa_backup_2025-05-15_02-44-42.sql
+Fichier compressé: /home/tafita/Kinasa/backups/kinasa_backup_2025-05-15_02-44-42.sql.gz
+Nettoyage des sauvegardes de plus de 30 jours effectué
+Sauvegarde terminée: Thu May 15 02:44:43 AM EAT 2025
+----------------------
+----------------------
+Démarrage de la sauvegarde: Thu May 15 02:55:20 AM EAT 2025
+ERREUR: La sauvegarde a échoué

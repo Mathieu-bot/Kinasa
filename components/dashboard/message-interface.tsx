@@ -1,8 +1,9 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Send, Search, Phone, Video, MoreVertical, FileText, Image as ImageIcon, AtSign, PaperclipIcon, Smile, ChevronLeft, Menu } from "lucide-react"
+import { Send, Search, Phone, Video, MoreVertical, FileText, Image as ImageIcon, AtSign, PaperclipIcon, Smile, ChevronLeft } from "lucide-react"
 import { InputWithIcon } from "@/components/ui/input-with-icon"
+import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -121,6 +122,7 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
       }
     ]
     
+    // Add some unread messages for certain contacts
     if (contactId === 'farmer1' || contactId === 'buyer1') {
       simulatedMessages.push(
         {
@@ -161,6 +163,7 @@ export const MessageInterface = ({ contacts, userType }: MessageInterfaceProps) 
     setMessages([...messages, newMessage])
     setMessageInput("")
     
+    // Simulate an automatic reply after 2 seconds
     setTimeout(() => {
       const autoReply: Message = {
         id: `msg-auto-${Date.now()}`,

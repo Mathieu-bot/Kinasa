@@ -1,8 +1,9 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Globe, Home, MessageSquare, Package, Settings, ShoppingCart, BarChart3, Users, Award, X, DollarSign } from "lucide-react"
+import { Home, MessageSquare, Package, Settings, ShoppingCart, BarChart3, Users, Award, X, DollarSign } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
@@ -41,7 +42,7 @@ export function DashboardSidebar({ type, userType, isMobileOpen = false, onMobil
     <>
       <div className="flex h-14 items-center border-b px-4">
         <Link href="/" className="flex items-center gap-2 font-semibold">
-          <Globe className="h-6 w-6 text-amber-300" />
+          <Image src="/logo.svg" alt="Kinasa Logo" width={28} height={28} className="text-amber-300" />
           <span className="text-white text-xl">Kinasa</span>
         </Link>
         {isMobileOpen && (
@@ -70,8 +71,8 @@ export function DashboardSidebar({ type, userType, isMobileOpen = false, onMobil
             <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">3</Badge>
           </Link>
           <Link
-            href={`${basePath}/products`}
-            className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${isActive(`${basePath}/products`) ? 'bg-emerald-600 text-white' : 'text-amber-50 hover:bg-emerald-600/50'}`}
+            href={isFramer ? `${basePath}/products` : `/dashboard/market`}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${(isFramer ? isActive(`${basePath}/products`) : isActive('/dashboard/market')) ? 'bg-emerald-600 text-white' : 'text-amber-50 hover:bg-emerald-600/50'}`}
             onClick={handleLinkClick}
           >
             <Package className="h-4 w-4" />

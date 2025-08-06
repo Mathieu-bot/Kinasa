@@ -7,12 +7,22 @@ import prisma from "@/lib/prisma";
 import { compare } from "bcrypt";
 
 // Extend session types
+import { User as PrismaUser } from "@prisma/client";
+
 declare module "next-auth" {
   interface Session {
     user: {
       id: string;
+      role?: string;
+      cooperativeId?: string;
     } & DefaultSession["user"];
     accessToken?: string;
+  }
+
+  interface User extends Omit<PrismaUser, "password"> {
+    id: string;
+    role?: string;
+    cooperativeId?: string | null;
   }
 }
 
@@ -47,22 +57,36 @@ export const authOptions: AuthOptions = {
           throw new Error("Email and password required");
         }
 
-        const user = await prisma.user.findUnique({
+        const dbUser = await prisma.user.findUnique({
           where: {
             email: credentials.email
           }
         });
 
-        if (!user || !user.password) {
+        if (!dbUser || !dbUser.password) {
           throw new Error("Email does not exist");
         }
 
         // Use bcrypt to securely compare passwords
-        const isCorrectPassword = await compare(credentials.password, user.password);
+        const isCorrectPassword = await compare(credentials.password, dbUser.password);
 
         if (!isCorrectPassword) {
           throw new Error("Incorrect password");
         }
+
+        // Create a user object that matches next-auth User interface
+        // Omit the password field for security
+        const user = {
+          id: dbUser.id,
+          email: dbUser.email,
+          name: dbUser.name,
+          image: dbUser.image,
+          role: dbUser.role,
+          cooperativeId: dbUser.cooperativeId,
+          emailVerified: dbUser.emailVerified,
+          createdAt: dbUser.createdAt,
+          updatedAt: dbUser.updatedAt
+        };
 
         return user;
       }
@@ -80,10 +104,24 @@ export const authOptions: AuthOptions = {
     },
     async session({ session, token }) {
       session.user.id = token.sub || "";
+      session.user.role = token.role as string;
       session.accessToken = token.accessToken as string;
+      
+      // Pass cooperativeId from token to session if it exists
+      if ('cooperativeId' in token) {
+        session.user.cooperativeId = token.cooperativeId as string;
+      }
+      
       return session;
     },
     async jwt({ token, user, account }) {
+      if (user) {
+        token.role = user.role;
+        // Include cooperativeId if it exists in the user object
+        if ('cooperativeId' in user) {
+          token.cooperativeId = user.cooperativeId;
+        }
+      }
       if (account) {
         token.accessToken = account.access_token;
         token.sub = user?.id || token.sub;
